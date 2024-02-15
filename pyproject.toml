@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "fireguard"
+version = "0.1.0"
+description = ""
+authors = ["h593286 <593286@stud.hvl.no>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

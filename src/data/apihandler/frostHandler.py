@@ -20,10 +20,9 @@ class FrostHandler:
                                 params=parameters,
                                 auth=(self.FROST_CLIENT_ID, self.FROST_CLIENT_SECRET))
 
-        return response.json()
+        return response
 
     def nearestStation(self, long, lat):
-
         parameters = {
             'types': 'SensorSystem',
             'elements': 'air_temperature,relative_humidity,wind_speed',
@@ -36,10 +35,3 @@ class FrostHandler:
         json = response.json()
         stationId = json['data'][0]['id']
         return stationId
-
-
-frostHandler = FrostHandler()
-nearest = frostHandler.nearestStation(10,59)
-
-r = frostHandler.sendObservationRequest(nearest)
-print(r)

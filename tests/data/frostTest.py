@@ -1,9 +1,9 @@
 import unittest
-from src.data.apihandler.frostHandler import FrostHandler
+from src.data.apihandler.frostClient import FrostClient
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
-        self.handler = FrostHandler()
+        self.handler = FrostClient()
     def test_Station(self):
         nearest = self.handler.nearestStation(10, 59)
         target = 'SN30242'
@@ -11,7 +11,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_Observation(self):
         source = 'SN30242'
-        r = self.handler.sendObservationRequest(source)
+        r = self.handler.sendObservationRequest(10,59)
         self.assertEqual(r.status_code,200)
 
 

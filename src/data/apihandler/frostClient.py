@@ -3,6 +3,10 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
+
+
+# Frostclient, simple contact point for frost
+# Only gets the observation, does not format it
 class FrostClient:
     def __init__(self):
         self.FROST_CLIENT_ID = os.getenv('FROST_CLIENT_ID')

@@ -1,7 +1,7 @@
 
 import datetime
 
-
+# Time format class, maybe more tools later
 def format_date(dt: datetime.datetime):
     return dt.strftime('%Y-%m-%d')
 

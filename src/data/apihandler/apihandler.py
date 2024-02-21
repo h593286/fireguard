@@ -3,6 +3,8 @@ from datetime import date, datetime
 from collections.abc import Iterable
 from src.data.apihandler import util
 
+
+# Responsible for getting observations from the different weather clients and handling potenial errors
 class APIHandler:
     def __init__(self):
         self.frostClient = FrostClient()

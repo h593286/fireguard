@@ -19,14 +19,14 @@ def form_display():
     return f'''
         <form action="http://127.0.0.1:5001/get_firerisk_city" method="get">
             {dropdown_html}
-            <input type="submit" value="Get FireRisk"/>
+            <input type="submit" value="Get TTF"/>
         </form>
-        <form action="http://127.0.0.1:5001/get_firerisk_coordinates" method="get">
+        <form action="http://127.0.0.1:5001/get_firerisk_coordinates" method="get"> 
             <input type="text" name="lat" placeholder="Latitude"/>
             <input type="text" name="lng" placeholder="Longitude"/>
-            <input type="submit" value="Get FireRisk"/>
+            <input type="submit" value="Get TTF"/>
         </form>
-    '''
+    ''' ##MÅ OPPDATERE ENDPOINT NÅR VI HAR FÅTT API
 
 
 if __name__ == '__main__':

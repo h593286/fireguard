@@ -10,7 +10,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(target, nearest)
 
     def test_Observation(self):
-        source = 'SN30242'
         r = self.handler.sendObservationRequest(10,59)
         self.assertEqual(r.status_code,200)
 

@@ -21,7 +21,7 @@ class METClient:
 
         #User-Agent needs to be changed, it requires the user agent not to be a python script, acts as an identifire(needs to be unique)
         headers = {
-            'User-Agent': 'Test'
+            'User-Agent': self.FROST_CLIENT_ID
         }
         #auth is not used
         response = requests.get(self.forecastEndpoint,

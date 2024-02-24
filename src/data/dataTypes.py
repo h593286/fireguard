@@ -32,3 +32,17 @@ class Observations(BaseModel):
         data_strings = '\n'.join(map(str, self.data))
 
         return format_str + data_strings + '\n'
+
+
+class Forecast(BaseModel):
+
+    location: Location
+    data: list[WeatherDataPoint]
+
+    def __str__(self):
+        format_str = f'Forecast @ Location: {self.location}\n'
+
+        # Join all data points using '\n' as a separator
+        data_strings = '\n'.join(map(str, self.data))
+
+        return format_str + data_strings + '\n'

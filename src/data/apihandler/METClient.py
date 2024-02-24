@@ -1,5 +1,6 @@
 import requests
 from dotenv import load_dotenv
+from src.data.dataTypes import *
 import os
 
 load_dotenv()
@@ -12,11 +13,11 @@ class METClient:
         self.FROST_CLIENT_SECRET = os.getenv('FROST_CLIENT_SECRET')
         self.forecastEndpoint = 'https://api.met.no/weatherapi/locationforecast/2.0/compact'
 
-    def sendForecastRequest(self,  long, lat):
+    def sendForecastRequest(self,  location: Location):
 
         parameters = {
-            'lat': lat,
-            'lon': long}
+            'lat': location.latitude,
+            'lon': location.longitude}
 
         #User-Agent needs to be changed, it requires the user agent not to be a python script, acts as an identifire(needs to be unique)
         headers = {

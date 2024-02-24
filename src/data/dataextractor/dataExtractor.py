@@ -15,7 +15,7 @@ class DataExtractor:
         self.METClient = METClient()
 
     def extractObservation(self, location: Location):
-        # Take out the nessecary elements from the observation and return it
+        # Take out the necessary elements from the observation and return it
 
         response = FrostClient().sendObservationRequest(location)
 
@@ -63,9 +63,39 @@ class DataExtractor:
         observations = Observations(source=source_id, location=location, data=weatherdatapoints)
         print(observations)
         return observations
-    def extractForecast(self, forecast, long, lat):
-        # Take out the nessecary elements from the forecast and return it
-        response = METClient().sendForecastRequest(long, lat)
-        data = response.json()
+    def extractForecast(self, location: Location):
+        # Take out the necessary elements from the forecast and return it
 
-        return data
+        response = METClient().sendForecastRequest(location).json()
+
+        coordinates = response['geometry']['coordinates']
+
+        latitude = coordinates[1]
+        longitude = coordinates[0]
+
+        location = Location(latitude=latitude, longitude=longitude)
+
+        timeseries = response['properties']['timeseries']
+
+        weatherdatapoints = list()
+
+        for forecast in timeseries:
+
+            timestamp = dateutil.parser.parse(forecast['time'])
+
+            details = forecast['data']['instant']['details']
+
+            temperature = details['air_temperature']
+            humidity = details['relative_humidity']
+            wind_speed = details['wind_speed']
+
+            wd_point = WeatherDataPoint(temperature=temperature,
+                                        humidity=humidity,
+                                        wind_speed=wind_speed,
+                                        timestamp=timestamp)
+
+            weatherdatapoints.append(wd_point)
+
+        forecast = Forecast(location=location,data=weatherdatapoints)
+
+        return forecast

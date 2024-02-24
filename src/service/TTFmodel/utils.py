@@ -44,7 +44,6 @@ def calc_cwsat(pwsat: float ,temp_c: float) -> float:
     temp_c: float, required
         The temperature to calculate the constrentation for. Expected to be in celsius.
 
-    
     Returns
     -------
     float
@@ -92,13 +91,42 @@ def calc_fmc(rh) -> float:
 
 
 # air change per hour (ach)
-def calc_ach(temp_c_out, temp_c_in) -> float:
+def calc_ach(temp_c_out: float, temp_c_in: float) -> float:
+    """Calculates how many times the total volume of air in a space is changed every hour
+
+    For more information visit: https://en.wikipedia.org/wiki/Air_changes_per_hour
+    
+    Parameters
+    ----------
+    temp_c_out: float, required
+        the outside temperature, expected to be in celsius
+    temp_c_in: float, required
+        the inside temperature, expected to be in celsius
+    
+    Returns
+    -------
+    float
+        The air change per hour.
+    """ 
     c_ach = mp.gamma * math.sqrt((abs(1 / (temp_c_out + 273.15) - 1 / (temp_c_in + 273.15)) / (temp_c_out + 273.15)))
     return c_ach
 
 
 # beta ventilation factor
-def calc_beta(c_ach) -> float:
+def calc_beta(c_ach: float) -> float:
+    """Calculates the beta ventilation factor given the air change per hour
+    
+    Parameters
+    ----------
+    c_ach: float, required
+        The air change per hour for celsius.
+
+    Returns
+    -------
+    float
+        The beta ventilation factor
+    """
+
     c_beta = 1 - math.exp((-c_ach * mp.delta_t)/3600)
     return c_beta
 

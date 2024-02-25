@@ -1,11 +1,11 @@
-from src.data.apihandler.apihandler import FrostClient
-from src.data.dataTypes import *
+from data.apihandler.apihandler import FrostClient
+from data.dataTypes import *
 import numpy as np
 import dateutil.parser
 
 
 #Check if correct import
-from src.data.apihandler.METClient import METClient
+from data.apihandler.METClient import METClient
 
 # Extracts the wanted data from the observations and forecasts.
 # Same format for storage

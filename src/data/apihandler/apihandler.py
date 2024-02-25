@@ -1,7 +1,7 @@
-from src.data.apihandler.frostClient import FrostClient
+from data.apihandler.frostClient import FrostClient
 from datetime import date, datetime
 from collections.abc import Iterable
-from src.data.apihandler import util
+from data.apihandler import util
 
 
 # Responsible for getting observations from the different weather clients and handling potenial errors

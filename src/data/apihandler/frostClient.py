@@ -1,6 +1,6 @@
 import requests
 from dotenv import load_dotenv
-from data.dataTypes import *
+from src.data.dataTypes import *
 import os
 
 load_dotenv()

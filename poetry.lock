@@ -12,6 +12,33 @@ files = [
 ]
 
 [[package]]
+name = "ansicon"
+version = "1.89.0"
+description = "Python wrapper for loading Jason Hood's ANSICON"
+optional = false
+python-versions = "*"
+files = [
+    {file = "ansicon-1.89.0-py2.py3-none-any.whl", hash = "sha256:f1def52d17f65c2c9682cf8370c03f541f410c1752d6a14029f97318e4b9dfec"},
+    {file = "ansicon-1.89.0.tar.gz", hash = "sha256:e4d039def5768a47e4afec8e89e83ec3ae5a26bf00ad851f914d1240b444d2b1"},
+]
+
+[[package]]
+name = "blessed"
+version = "1.20.0"
+description = "Easy, practical library for making terminal apps, by providing an elegant, well-documented interface to Colors, Keyboard input, and screen Positioning capabilities."
+optional = false
+python-versions = ">=2.7"
+files = [
+    {file = "blessed-1.20.0-py2.py3-none-any.whl", hash = "sha256:0c542922586a265e699188e52d5f5ac5ec0dd517e5a1041d90d2bbf23f906058"},
+    {file = "blessed-1.20.0.tar.gz", hash = "sha256:2cdd67f8746e048f00df47a2880f4d6acbcdb399031b604e34ba8f71d5787680"},
+]
+
+[package.dependencies]
+jinxed = {version = ">=1.1.0", markers = "platform_system == \"Windows\""}
+six = ">=1.9.0"
+wcwidth = ">=0.1.4"
+
+[[package]]
 name = "blinker"
 version = "1.7.0"
 description = "Fast, simple object-to-object and broadcast signaling"
@@ -147,6 +174,17 @@ files = [
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
+name = "codefind"
+version = "0.1.3"
+description = "Find code objects and their referents"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "codefind-0.1.3-py3-none-any.whl", hash = "sha256:3ffe85b74595b5c9f82391a11171ce7d68f1f555485720ab922f3b86f9bf30ec"},
+    {file = "codefind-0.1.3.tar.gz", hash = "sha256:5667050361bf601a253031b2437d16b7d82cb0fa0e756d93e548c7b35ce6f910"},
+]
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 description = "Cross-platform colored terminal text."
@@ -217,6 +255,40 @@ MarkupSafe = ">=2.0"
 
 [package.extras]
 i18n = ["Babel (>=2.7)"]
+
+[[package]]
+name = "jinxed"
+version = "1.2.1"
+description = "Jinxed Terminal Library"
+optional = false
+python-versions = "*"
+files = [
+    {file = "jinxed-1.2.1-py2.py3-none-any.whl", hash = "sha256:37422659c4925969c66148c5e64979f553386a4226b9484d910d3094ced37d30"},
+    {file = "jinxed-1.2.1.tar.gz", hash = "sha256:30c3f861b73279fea1ed928cfd4dfb1f273e16cd62c8a32acfac362da0f78f3f"},
+]
+
+[package.dependencies]
+ansicon = {version = "*", markers = "platform_system == \"Windows\""}
+
+[[package]]
+name = "jurigged"
+version = "0.5.7"
+description = "Live update of Python functions"
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "jurigged-0.5.7-py3-none-any.whl", hash = "sha256:0a13a27bd6bffe71a50aecf75f29577c6de40ed8ef94fb6977f495b8c2071514"},
+    {file = "jurigged-0.5.7.tar.gz", hash = "sha256:3afbb05f51f48a83e0f426fb0ea9cb44c3afefd6c49d11a783f6985576dd18db"},
+]
+
+[package.dependencies]
+blessed = ">=1.17.12,<2.0.0"
+codefind = ">=0.1.3,<0.2.0"
+ovld = ">=0.3.1,<0.4.0"
+watchdog = ">=1.0.2"
+
+[package.extras]
+develoop = ["giving (>=0.4.1,<0.5.0)", "rich (>=10.13.0)"]
 
 [[package]]
 name = "markupsafe"
@@ -330,6 +402,17 @@ files = [
     {file = "numpy-1.26.4-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:95a7476c59002f2f6c590b9b7b998306fba6a5aa646b1e22ddfeaf8f78c3a29c"},
     {file = "numpy-1.26.4-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:7e50d0a0cc3189f9cb0aeb3a6a6af18c16f59f004b866cd2be1c14b36134a4a0"},
     {file = "numpy-1.26.4.tar.gz", hash = "sha256:2a02aba9ed12e4ac4eb3ea9421c420301a0c6460d9830d74a9df87efa4912010"},
+]
+
+[[package]]
+name = "ovld"
+version = "0.3.2"
+description = "Overloading Python functions"
+optional = false
+python-versions = ">=3.6,<4.0"
+files = [
+    {file = "ovld-0.3.2-py3-none-any.whl", hash = "sha256:3a5f08f66573198b490fc69dcf93a2ad9b4d90fd1fef885cf7a8dbe565f17837"},
+    {file = "ovld-0.3.2.tar.gz", hash = "sha256:f8918636c240a2935175406801944d4314823710b3afbd5a8db3e79cd9391c42"},
 ]
 
 [[package]]
@@ -531,6 +614,58 @@ socks = ["pysocks (>=1.5.6,!=1.5.7,<2.0)"]
 zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
+name = "watchdog"
+version = "4.0.0"
+description = "Filesystem events monitoring"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "watchdog-4.0.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:39cb34b1f1afbf23e9562501673e7146777efe95da24fab5707b88f7fb11649b"},
+    {file = "watchdog-4.0.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:c522392acc5e962bcac3b22b9592493ffd06d1fc5d755954e6be9f4990de932b"},
+    {file = "watchdog-4.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:6c47bdd680009b11c9ac382163e05ca43baf4127954c5f6d0250e7d772d2b80c"},
+    {file = "watchdog-4.0.0-cp311-cp311-macosx_10_9_universal2.whl", hash = "sha256:8350d4055505412a426b6ad8c521bc7d367d1637a762c70fdd93a3a0d595990b"},
+    {file = "watchdog-4.0.0-cp311-cp311-macosx_10_9_x86_64.whl", hash = "sha256:c17d98799f32e3f55f181f19dd2021d762eb38fdd381b4a748b9f5a36738e935"},
+    {file = "watchdog-4.0.0-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:4986db5e8880b0e6b7cd52ba36255d4793bf5cdc95bd6264806c233173b1ec0b"},
+    {file = "watchdog-4.0.0-cp312-cp312-macosx_10_9_universal2.whl", hash = "sha256:11e12fafb13372e18ca1bbf12d50f593e7280646687463dd47730fd4f4d5d257"},
+    {file = "watchdog-4.0.0-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:5369136a6474678e02426bd984466343924d1df8e2fd94a9b443cb7e3aa20d19"},
+    {file = "watchdog-4.0.0-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:76ad8484379695f3fe46228962017a7e1337e9acadafed67eb20aabb175df98b"},
+    {file = "watchdog-4.0.0-cp38-cp38-macosx_10_9_universal2.whl", hash = "sha256:45cc09cc4c3b43fb10b59ef4d07318d9a3ecdbff03abd2e36e77b6dd9f9a5c85"},
+    {file = "watchdog-4.0.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:eed82cdf79cd7f0232e2fdc1ad05b06a5e102a43e331f7d041e5f0e0a34a51c4"},
+    {file = "watchdog-4.0.0-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:ba30a896166f0fee83183cec913298151b73164160d965af2e93a20bbd2ab605"},
+    {file = "watchdog-4.0.0-cp39-cp39-macosx_10_9_universal2.whl", hash = "sha256:d18d7f18a47de6863cd480734613502904611730f8def45fc52a5d97503e5101"},
+    {file = "watchdog-4.0.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:2895bf0518361a9728773083908801a376743bcc37dfa252b801af8fd281b1ca"},
+    {file = "watchdog-4.0.0-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:87e9df830022488e235dd601478c15ad73a0389628588ba0b028cb74eb72fed8"},
+    {file = "watchdog-4.0.0-pp310-pypy310_pp73-macosx_10_9_x86_64.whl", hash = "sha256:6e949a8a94186bced05b6508faa61b7adacc911115664ccb1923b9ad1f1ccf7b"},
+    {file = "watchdog-4.0.0-pp38-pypy38_pp73-macosx_10_9_x86_64.whl", hash = "sha256:6a4db54edea37d1058b08947c789a2354ee02972ed5d1e0dca9b0b820f4c7f92"},
+    {file = "watchdog-4.0.0-pp39-pypy39_pp73-macosx_10_9_x86_64.whl", hash = "sha256:d31481ccf4694a8416b681544c23bd271f5a123162ab603c7d7d2dd7dd901a07"},
+    {file = "watchdog-4.0.0-py3-none-manylinux2014_aarch64.whl", hash = "sha256:8fec441f5adcf81dd240a5fe78e3d83767999771630b5ddfc5867827a34fa3d3"},
+    {file = "watchdog-4.0.0-py3-none-manylinux2014_armv7l.whl", hash = "sha256:6a9c71a0b02985b4b0b6d14b875a6c86ddea2fdbebd0c9a720a806a8bbffc69f"},
+    {file = "watchdog-4.0.0-py3-none-manylinux2014_i686.whl", hash = "sha256:557ba04c816d23ce98a06e70af6abaa0485f6d94994ec78a42b05d1c03dcbd50"},
+    {file = "watchdog-4.0.0-py3-none-manylinux2014_ppc64.whl", hash = "sha256:d0f9bd1fd919134d459d8abf954f63886745f4660ef66480b9d753a7c9d40927"},
+    {file = "watchdog-4.0.0-py3-none-manylinux2014_ppc64le.whl", hash = "sha256:f9b2fdca47dc855516b2d66eef3c39f2672cbf7e7a42e7e67ad2cbfcd6ba107d"},
+    {file = "watchdog-4.0.0-py3-none-manylinux2014_s390x.whl", hash = "sha256:73c7a935e62033bd5e8f0da33a4dcb763da2361921a69a5a95aaf6c93aa03a87"},
+    {file = "watchdog-4.0.0-py3-none-manylinux2014_x86_64.whl", hash = "sha256:6a80d5cae8c265842c7419c560b9961561556c4361b297b4c431903f8c33b269"},
+    {file = "watchdog-4.0.0-py3-none-win32.whl", hash = "sha256:8f9a542c979df62098ae9c58b19e03ad3df1c9d8c6895d96c0d51da17b243b1c"},
+    {file = "watchdog-4.0.0-py3-none-win_amd64.whl", hash = "sha256:f970663fa4f7e80401a7b0cbeec00fa801bf0287d93d48368fc3e6fa32716245"},
+    {file = "watchdog-4.0.0-py3-none-win_ia64.whl", hash = "sha256:9a03e16e55465177d416699331b0f3564138f1807ecc5f2de9d55d8f188d08c7"},
+    {file = "watchdog-4.0.0.tar.gz", hash = "sha256:e3e7065cbdabe6183ab82199d7a4f6b3ba0a438c5a512a68559846ccb76a78ec"},
+]
+
+[package.extras]
+watchmedo = ["PyYAML (>=3.10)"]
+
+[[package]]
+name = "wcwidth"
+version = "0.2.13"
+description = "Measures the displayed width of unicode strings in a terminal"
+optional = false
+python-versions = "*"
+files = [
+    {file = "wcwidth-0.2.13-py2.py3-none-any.whl", hash = "sha256:3da69048e4540d84af32131829ff948f1e022c1c6bdb8d6102117aac784f6859"},
+    {file = "wcwidth-0.2.13.tar.gz", hash = "sha256:72ea0c06399eb286d978fdedb6923a9eb47e1c486ce63e9b4e64fc18303972b5"},
+]
+
+[[package]]
 name = "werkzeug"
 version = "3.0.1"
 description = "The comprehensive WSGI web application library."
@@ -550,4 +685,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "91bb0db9f3964fbe7246b7e37b17694a8671dd5279f5d3537382e0726a405a0b"
+content-hash = "8ee97442f74191d53a1bdc2a00e92ac4dd7c9d91dc124b8e8eb0b381f82c5a30"

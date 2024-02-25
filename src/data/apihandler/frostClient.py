@@ -1,5 +1,6 @@
 import requests
 from dotenv import load_dotenv
+from src.data.dataTypes import *
 import os
 
 load_dotenv()
@@ -14,8 +15,8 @@ class FrostClient:
         self.observationEndpoint = 'https://frost.met.no/observations/v0.jsonld'
         self.sourcesEndpoint = 'https://frost.met.no/sources/v0.jsonld'
 
-    def sendObservationRequest(self, long, lat, time='latest'):
-        source = self.nearestStation(long,lat)
+    def sendObservationRequest(self, location: Location, time='latest'):
+        source = self.nearestStation(location)
 
         parameters = {
             'sources': source,
@@ -28,11 +29,11 @@ class FrostClient:
 
         return response
 
-    def nearestStation(self, long, lat):
+    def nearestStation(self, location: Location):
         parameters = {
             'types': 'SensorSystem',
             'elements': 'air_temperature,relative_humidity,wind_speed',
-            'geometry': f'nearest(POINT({long} {lat}))'}
+            'geometry': f'nearest(POINT({location.longitude} {location.latitude}))'}
 
         response = requests.get(self.sourcesEndpoint,
                                 params=parameters,

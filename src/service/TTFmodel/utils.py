@@ -2,7 +2,7 @@
 
 import math
 import numpy as np
-import TTFmodel.parameters as mp
+import src.service.TTFmodel.parameters as mp
 
 """Functions for computing saturation vapor pressure, and water concentrations"""
 """ pw_sat -- cw_sat -- cw_in -- initial fmc """
@@ -81,7 +81,22 @@ def calc_cw(rh: float, cwsat: float) -> float:
 
 # computes initial fmc of wooden panels
 # computes fmc from indoor rh (equilibrium state) rh must be given as a fraction, e.g., 0.35
-def calc_fmc(rh) -> float:
+def calc_fmc(rh: float) -> float:
+    """Calculates the initial fmc of wooden panels.
+
+    This methods calculates fmc based on indoor rh.
+
+    Parameters
+    ----------
+    rh: float, required
+        indoor rh (equilibrium state). Expected to be a value between 0 and 1.
+    
+    Returns
+    -------
+    float
+        the initial fmc for wooden panels.
+    """
+
     c_fmc = 0.0017 + 0.2524 * rh - 0.1986 * math.pow(rh,2) + 0.0279 * math.pow(rh,3) + 0.167 * math.pow(rh,4)
     return c_fmc
 
@@ -135,19 +150,64 @@ def calc_beta(c_ach: float) -> float:
 
 
 # extrapolating wooden panel fmc to a surface value
-def calc_surf(c1_t, c2_t) -> float:
+def calc_surf(c1_t: float, c2_t: float) -> float:
+    """Extrapolate the fmc between two wall layer values.
+    
+    Parameters
+    ----------
+    c1_t: float, required
+        The first wooden panel value.
+    
+    c2_t: float, required
+        The second wooden panel value.
+
+    Returns
+    -------
+    float
+        The extrapolated surface value.
+    """
     c_surf = c1_t - 0.5 * (c2_t - c1_t)
     return c_surf
 
 
 # water concentration difference between bulk air and wall boundary layer - inputs from previous timestep
-def calc_deltac(rhin, rhwall, cwsatin) -> float:
+def calc_deltac(rhin: float, rhwall: float, cwsatin: float) -> float:
+    """Calculates the difference between water consentration in bulk air and the wall boundary.
+    
+    Parameters
+    ----------
+    rhin: float, required
+        The relative humidity inside (in bulk air).
+    
+    rhwall: float, required
+        The relative humidity in the wall boundary layer.
+
+    cwsatin: float, required
+        The water consentration at saturation water pressure inside.
+
+    Returns
+    -------
+    float
+        The difference in water consentration.
+    """
     deltac = (rhwall - rhin) * cwsatin
     return deltac
 
 
 # relative humidity at wooden panel surfaces - inputs surface fmc at equal timestep
-def calc_rhwall(cfmc) -> float:
+def calc_rhwall(cfmc: float) -> float:
+    """calculates the relative humidity for wooden panel surfaces.
+
+    Parameters
+    ----------
+    cfmc: float, required
+        The surface fmc to calculate relative humidity for
+
+    Returns
+    -------
+    float
+        The relative humidity for the surface
+    """
     rhwall = 0.0698 - 1.258 * (cfmc / mp.rho_wood) + 125.35 * math.pow((cfmc / mp.rho_wood),2) - 809.43 * math.pow((cfmc / mp.rho_wood),3) + 1583.8 * math.pow((cfmc / mp.rho_wood),4)
     return rhwall
 
@@ -186,16 +246,59 @@ def calc_outer_layer(cn_t, c_pre_n_t) -> float:
 """ Supply -- Air Change by Ventilation -- Humidity Exchange From Wooden Surfaces"""
 
 
-def calc_csupply(sup) -> float:
+def calc_csupply(sup: float) -> float:
+    """Calculates something. Don't know yet
+
+    Parameters
+    ----------
+    sup: float, required
+        The air supply.
+
+    Returns
+    -------
+    float
+    """
     csupply = sup / mp.Vol
     return csupply
 
 
-def calc_cac(beta, cw_out, temp_c_out, temp_c_in) -> float:
+def calc_cac(beta: float, cw_out: float, temp_c_out: float, temp_c_in: float) -> float:
+    """Calculates something. Don't know yet.
+    
+    Parameters
+    ----------
+    beta: float, required
+        The beta ventilation factor.
+    
+    cw_out: float, required
+        The water consentration outside.
+    
+    temp_c_out: float, required
+        The temperature outside, expected to be in celsius.
+    
+    temp_c_in: float, required
+        The temperature inside, expected to be in celsius.
+    
+    Returns
+    -------
+    float
+    """
     cac = beta * cw_out * ((temp_c_out + 273.15) / (temp_c_in + 273.15))
     return cac
 
 
-def calc_cwall(deltac) -> float:
+def calc_cwall(deltac: float) -> float:
+    """Calculates the water consentration inside the wall.
+
+    Parameters
+    ----------
+    deltac: float, required
+        The difference in water consentration in the air and in the boundary layer of the wall.
+
+    Returns
+    -------
+    float
+        The water consentration of the wall.
+    """
     cwall = (mp.A_ex * mp.D_W_a * deltac * mp.delta_t / mp.boundary_layer) / mp.Vol
     return cwall

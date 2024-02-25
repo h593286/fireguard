@@ -1,0 +1,1 @@
+from src.service.TTFmodel.compute import compute_firerisk

@@ -11,8 +11,20 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry install
+
+ARG ENVIRONMENT=Development
+ENV ENVIRONMENT=${ENVIRONMENT}
+
+RUN if [$ENVIRONMENT = "Development"]; \
+        then poetry install; \
+    else \
+        poetry install --no-dev; \
+    fi
 
 COPY src ./src
 
-ENTRYPOINT [ "poetry", "run", "python", "src/main.py" ]
+CMD if [ $ENVIRONMENT = "Development" ]; then\
+        poetry run reloadium run ./src/main.py; \ 
+    else \
+        poetry run python ./src/main.py; \
+    fi

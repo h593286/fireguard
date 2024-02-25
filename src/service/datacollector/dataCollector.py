@@ -1,6 +1,6 @@
-from data.apihandler.apihandler import APIHandler
-from data.databasehandler.databaseHandler import DatabaseHandler
-from data.dataextractor.dataExtractor import DataExtractor
+from src.data.apihandler.apihandler import APIHandler
+from src.data.databasehandler.databaseHandler import DatabaseHandler
+from src.data.dataextractor.dataExtractor import DataExtractor
 
 # Responsible for the flow of data.
 # Uses apihandler to get new observation and forecasts

@@ -471,6 +471,31 @@ files = [
 cli = ["click (>=5.0)"]
 
 [[package]]
+name = "reloadium"
+version = "1.4.0"
+description = "Hot reloader aka edit and continue for Python"
+optional = false
+python-versions = ">=3.7.0,<4.0"
+files = [
+    {file = "reloadium-1.4.0-cp310-cp310-macosx_11_0_x86_64.whl", hash = "sha256:3dc490b8772377d2e9e7a900f8781e73de62dba481bca5328e8e081e1f68a252"},
+    {file = "reloadium-1.4.0-cp310-cp310-macosx_12_0_arm64.whl", hash = "sha256:fc35350dbfeb4630e0e60ee4fe0f6198d4f0ad69b4cb04f262fb754acc740708"},
+    {file = "reloadium-1.4.0-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ad30d9042ba15323a05c0b0086d3e7776ea06aa51946e0b6f3000ade60eaf7f8"},
+    {file = "reloadium-1.4.0-cp310-cp310-win_amd64.whl", hash = "sha256:0416a17ffa6086f7024cb17377547a90338fe7746648d2dfa9a45a2ce9b02d15"},
+    {file = "reloadium-1.4.0-cp311-cp311-macosx_11_0_universal2.whl", hash = "sha256:379421414931fc3e2735325ac24fd39ed4e86c1608b23805d34459ce7c2917ef"},
+    {file = "reloadium-1.4.0-cp311-cp311-macosx_12_0_arm64.whl", hash = "sha256:0fce42d858000c2023a8e289aed797a220d1cc1dae955a799f54dff7d0e17eb6"},
+    {file = "reloadium-1.4.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:1d8851442d7084bda454fae03726065135518bcae925388c33f93a0bdcaa8a0a"},
+    {file = "reloadium-1.4.0-cp311-cp311-win_amd64.whl", hash = "sha256:f0827edff21a36423cf37d73167db9686808966642dc5d1fd59de7d7e4048e4c"},
+    {file = "reloadium-1.4.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:8aedb135cc6b9a66ffbdcfbeb7d394d2937af20ab507bd61394d050a65a562e2"},
+    {file = "reloadium-1.4.0-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:812e9b78c36f9a3a80f39941e3d648803c4ffcfe43ce82c4ed8fd3ceef231fad"},
+    {file = "reloadium-1.4.0-cp38-cp38-win_amd64.whl", hash = "sha256:868c0b4666ab8a281bddaa6523ca6abcd23490b6de8ee0ce27d15d9e39dee5db"},
+    {file = "reloadium-1.4.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:a5bcf74dae02bfa1ba2843b868c2c71eda5345f44ecb3d9f1c4bb6d25a3ffc17"},
+    {file = "reloadium-1.4.0-cp39-cp39-macosx_12_0_arm64.whl", hash = "sha256:3123e1c369427e27cdbe9d8a3d8f29ed668ae4a5f24ae3b955081b367179668d"},
+    {file = "reloadium-1.4.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:70b90b761a8c627bd51e1738a35a7e352227e6f71e31ee1fe352c7fc23cc069b"},
+    {file = "reloadium-1.4.0-cp39-cp39-win_amd64.whl", hash = "sha256:bef214505db4f1a33a28e6a27fff7ad0a824970eee9b8ea433479a6417d2603d"},
+    {file = "reloadium-1.4.0-py3-none-any.whl", hash = "sha256:257fcd454fcdcbea0e96f105a9f99420ca9361e9a5c1c2d7679e0caee777324d"},
+]
+
+[[package]]
 name = "requests"
 version = "2.31.0"
 description = "Python HTTP for Humans."
@@ -550,4 +575,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "91bb0db9f3964fbe7246b7e37b17694a8671dd5279f5d3537382e0726a405a0b"
+content-hash = "19b62f92657e5d5c8d709f464c154daaf5824b30d180bca56b1824e7c2c16d58"

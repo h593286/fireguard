@@ -2,6 +2,6 @@ services:
   web-api:
     build:
       args:
-        - ENVIRONMENT=Release
+        - ENVIRONMENT=Development
     volumes:
       - ./src:/app/src:ro

@@ -4,6 +4,8 @@ version = "0.1.0"
 description = ""
 authors = ["h593286 <593286@stud.hvl.no>"]
 readme = "README.md"
+packages = [{include = "src"}]
+
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -16,7 +18,7 @@ numpy = "^1.26.4"
 
 
 [tool.poetry.group.dev.dependencies]
-reloadium = "^1.4.0"
+jurigged = "^0.5.7"
 
 [build-system]
 requires = ["poetry-core"]

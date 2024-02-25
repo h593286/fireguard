@@ -11,20 +11,20 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock ./
 
-
 ARG ENVIRONMENT=Development
 ENV ENVIRONMENT=${ENVIRONMENT}
 
-RUN if [$ENVIRONMENT = "Development"]; \
+RUN if [ "$ENVIRONMENT" = "Development" ]; \
         then poetry install; \
     else \
-        poetry install --no-dev; \
+        poetry install --without dev; \
     fi
 
 COPY src ./src
+COPY ./main.py .
 
-CMD if [ $ENVIRONMENT = "Development" ]; then\
-        poetry run reloadium run ./src/main.py; \ 
+CMD if [ "$ENVIRONMENT" = "Development" ]; then\
+        poetry run python -m jurigged -v main.py --poll 1; \ 
     else \
-        poetry run python ./src/main.py; \
+        poetry run python main.py; \
     fi

@@ -56,3 +56,31 @@ class WeatherData(BaseModel):
 
     def to_json(self):
         return self.model_dump_json()
+
+
+class FireRisk(BaseModel):
+
+    timestamp: datetime.datetime
+    ttf: float
+
+    def __str__(self):
+        format_str = f'FireRisks[{self.timestamp} {self.ttf}]'
+
+        return format_str
+
+
+class FireRiskPrediction(BaseModel):
+
+    location: Location
+    firerisks: list[FireRisk]
+
+    def __str__(self):
+        format_str = f'FireRiskPrediction[{self.location}]\n'
+
+        # Generate list of formatted data points
+        data_str = [str(data_point) for data_point in self.firerisks]
+
+        # Join the list of formatted data points
+        format_str += '\n'.join(data_str)
+
+        return format_str

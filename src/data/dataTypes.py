@@ -46,3 +46,13 @@ class Forecast(BaseModel):
         data_strings = '\n'.join(map(str, self.data))
 
         return format_str + data_strings + '\n'
+
+class WeatherData(BaseModel):
+
+    created: datetime.datetime
+
+    observations: Observations
+    forecast: Forecast
+
+    def to_json(self):
+        return self.model_dump_json()

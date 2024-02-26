@@ -2,7 +2,7 @@
 import datetime
 
 # Time format class, maybe more tools later
-def format_date(dt: datetime.datetime):
+def format_date(dt: datetime.datetime | datetime.date):
     return dt.strftime('%Y-%m-%d')
 
 

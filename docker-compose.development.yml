@@ -1,0 +1,7 @@
+services:
+  web-api:
+    build:
+      args:
+        - ENVIRONMENT=Development
+    volumes:
+      - ./src:/app/src:ro

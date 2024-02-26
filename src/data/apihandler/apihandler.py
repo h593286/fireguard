@@ -1,7 +1,8 @@
-from data.apihandler.frostClient import FrostClient
+from src.data.apihandler.frostClient import FrostClient
 from datetime import date, datetime
 from collections.abc import Iterable
-from data.apihandler import util
+from src.data.apihandler import util
+from src.data.dataTypes import Location
 
 
 # Responsible for getting observations from the different weather clients and handling potenial errors
@@ -10,7 +11,7 @@ class APIHandler:
         self.frostClient = FrostClient()
 
 
-    def getObservation(self, long, lat, time='latest'):
+    def getObservation(self, long, lat, time ='latest'):
 
         # Default value
         if time == 'latest':
@@ -29,7 +30,7 @@ class APIHandler:
             raise ValueError(
                 "Invalid time argument. Must be 'latest', a datetime object, or an iterable of two datetime objects.")
 
-        return self.frostClient.sendObservationRequest(long,lat, formatted_time)
+        return self.frostClient.sendObservationRequest(Location(latitude=lat, longitude=long), formatted_time)
 
 
 

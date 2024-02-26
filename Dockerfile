@@ -11,8 +11,20 @@ WORKDIR /app
 
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry install
+ARG ENVIRONMENT=Development
+ENV ENVIRONMENT=${ENVIRONMENT}
+
+RUN if [ "$ENVIRONMENT" = "Development" ]; \
+        then poetry install; \
+    else \
+        poetry install --without dev; \
+    fi
 
 COPY src ./src
+COPY ./main.py .
 
-ENTRYPOINT [ "poetry", "run", "python", "src/main.py" ]
+CMD if [ "$ENVIRONMENT" = "Development" ]; then\
+        poetry run python -m jurigged -v main.py --poll 1; \ 
+    else \
+        poetry run python main.py; \
+    fi

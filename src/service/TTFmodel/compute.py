@@ -3,11 +3,36 @@ from pydantic import BaseModel
 import numpy as np
 import src.service.TTFmodel.parameters as pm
 import src.service.TTFmodel.utils as util
+from src.data.dataTypes import *
+from src.service.TTFmodel.preprocess import *
 
-class FireRisk(BaseModel):
-    ttf: float
-    timestamp: datetime.datetime
 
+def compute(wd: WeatherData) -> FireRiskPrediction:
+
+    # Get interpolated values #TODO (NOTE) The max_time_delta represents the largest gap in missing data (seconds). It can be used to provide suited warning/error message.
+    start_time, time_interpolated_sec, temp_interpolated, humidity_interpolated, wind_interpolated, max_time_delta = preprocess(wd)
+    comp_loc = wd.forecast.location
+
+    # Compute RH_in and TTF
+    rh_in, ttf = compute_firerisk(temp_interpolated, humidity_interpolated)
+
+    # Reduce data to once per hour, but the time is still given as seconds
+    rf = int(
+        3600 / pm.delta_t)  # Reduction factor, i.e., how many intervals per hour. Default delta_t = 720 s, hence rf = 5.
+    rh_in_hour = rh_in[::rf]  # Average is not computed, values are extracted per hour.
+    ttf_in_hour = ttf[::rf]
+    time_in_hour = time_interpolated_sec[::rf] # Time is still in seconds but given for every hour.
+
+    # Create response according to datamodel
+    firerisks = []
+    for i in range(len(rh_in_hour)):
+        timestamps = start_time + datetime.timedelta(seconds=time_in_hour[i])
+        firerisk_i = FireRisk(timestamp=timestamps, ttf=ttf_in_hour[i])
+        firerisks.append(firerisk_i)
+
+    FireRiskResponse = FireRiskPrediction(location=comp_loc, firerisks=firerisks)
+
+    return FireRiskResponse
 
 
 def compute_firerisk(temp_outside: list[float], relative_humidity_outside: list[float]):
@@ -116,3 +141,19 @@ def compute_firerisk(temp_outside: list[float], relative_humidity_outside: list[
     ttf = list(map(lambda y: 2 * np.exp(0.16*y),fmc))
 
     return relative_humidity_inside, ttf
+
+
+
+#####USAGE EXAMPLE, REMOVE IF NEEDED
+
+#from src.data.dataextractor.dataExtractor import *
+#import datetime
+
+#time_now = datetime.datetime.now()
+#observations = DataExtractor().extractObservation(Location(latitude=60.3894, longitude=5.3300))
+#forecast = DataExtractor().extractForecast(Location(latitude=60.3894, longitude=5.3300))
+
+#wd = WeatherData(created=time_now, observations=observations, forecast=forecast)
+
+#computed = compute(wd)
+#print(computed)

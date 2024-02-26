@@ -1,6 +1,6 @@
 import requests
 from dotenv import load_dotenv
-from data.dataTypes import *
+from src.data.dataTypes import *
 import os
 
 load_dotenv()
@@ -21,7 +21,7 @@ class METClient:
 
         #User-Agent needs to be changed, it requires the user agent not to be a python script, acts as an identifire(needs to be unique)
         headers = {
-            'User-Agent': self.FROST_CLIENT_ID
+            'User-Agent': "test"
         }
         #auth is not used
         response = requests.get(self.forecastEndpoint,

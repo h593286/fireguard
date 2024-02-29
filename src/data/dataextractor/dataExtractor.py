@@ -11,7 +11,7 @@ from src.data.apihandler.METClient import METClient
 # Same format for storage
 class DataExtractor:
 
-    def extractObservation(self, response):
+    def extractObservation(self, response, location : Location):
         # Take out the necessary elements from the observation and return it
 
         response = response.json()

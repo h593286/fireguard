@@ -16,7 +16,7 @@ class DataCollector:
         self.dataExtractor = DataExtractor()
 
 
-    def collectObservation(self, location : Location, time=None):
+    def collectObservation(self, location : Location, time='latest'):
 
         # ToDo
         if self.databaseHandler.checkObservation(location,time):
@@ -24,7 +24,7 @@ class DataCollector:
 
         else:
             observation = self.apiHandler.getObservation(location,time)
-            observation = self.dataExtractor.extractObservation(observation)
+            observation = self.dataExtractor.extractObservation(observation, location)
 
             self.databaseHandler.storeObservation(observation) #Stores the 'unseen' observation for potential later use
 
@@ -41,4 +41,3 @@ class DataCollector:
             forecast = self.dataExtractor.extractForecast(forecast)
 
         return forecast
-

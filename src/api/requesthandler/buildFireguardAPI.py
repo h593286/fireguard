@@ -6,7 +6,7 @@ from src.service.frcapi import FireRiskModelAPI
 
 # Build the Fireguard API server
 def Build_Fireguard():
-    json_raw = open('/Users/Magnus1/Documents/GitHub/fireguard/src/api/requesthandler/cities.json','r')
+    json_raw = open('./src/api/requesthandler/cities.json','r')
     json_data = json.load(json_raw)
 
     service_data = DataCollector()

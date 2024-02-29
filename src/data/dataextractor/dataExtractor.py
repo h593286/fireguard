@@ -7,7 +7,7 @@ import dateutil.parser
 #Check if correct import
 from src.data.apihandler.METClient import METClient
 
-# Extracts the wanted data from the observations and forecasts.
+# Extracts the wanted data from the observation- and forecast-responses.
 # Same format for storage
 class DataExtractor:
 

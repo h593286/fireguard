@@ -55,6 +55,7 @@ class FireLogic(BaseModel):
 
         location = Location(latitude=latitude, longitude=longitude)
 
+        '''
         obs_delta =  datetime.timedelta(days=2)
 
         # TODO: Get weatherdata (observations and forecast) from service layer
@@ -62,18 +63,18 @@ class FireLogic(BaseModel):
         wd = WeatherData(created=datetime.datetime.now(), observations=Observations(
             source="test", location=location, data=[WeatherDataPoint(temperature=34,humidity=4,wind_speed=2,timestamp=datetime.datetime.now())]), 
             forecast=Forecast(location=location, data=[WeatherDataPoint(temperature=34,humidity=4,wind_speed=2,timestamp=datetime.datetime.now())]))
-        
-        prediction = self.model_api.compute(wd)
-
+        '''
+        prediction = self.model_api.compute(self.model_api.client,location=location)
+        print(prediction)
         return prediction
     
-    def get_firerisk_by_coordinates_now(self, latitude: float, longitude: float):
+'''    def get_firerisk_by_coordinates_now(self, latitude: float, longitude: float):
         location = Location(latitude=latitude, longitude=longitude)
 
         obs_delta =  datetime.timedelta(days=2)
         prediction = self.model_api.compute_now(location, obs_delta)
 
-        return prediction
+        return prediction'''
 
     
         

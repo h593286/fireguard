@@ -13,10 +13,20 @@ class FireRiskModelAPI:
         self.timedelta_ok = datetime.timedelta(days=1)
         self.interpolate_distance = 720
 
-    def compute(self, wd: WeatherData) -> FireRiskPrediction:
+    def compute(self, data: DataCollector, location: Location) -> FireRiskPrediction:
         # Get the fire risk prediction
+        observations=data.collectObservation(location)
+        forecast=data.collectForecast(location)
+
+        if isinstance(observations, Observations):
+            obs = observations
+
+        if isinstance(forecast, Forecast):
+            fct = forecast
+
+        wd = WeatherData(created=datetime.datetime.now(), observations=obs, forecast=fct)
         return computeTTF.compute(wd)
-    
+''' 
     def compute_now(self, location: Location, obs_delta: datetime.timedelta) -> FireRiskPrediction:
 
         time_now = datetime.datetime.now()
@@ -34,10 +44,11 @@ class FireRiskModelAPI:
 
         print(wd.to_json())
 
-        prediction = self.compute(wd)
+        prediction = self.compute(wd, location)
 
         return prediction
-
+'''
+'''
     def compute_now_period(self, location: Location, obs_delta: datetime.timedelta, fct_delta: datetime.timedelta):
         pass
 
@@ -47,3 +58,4 @@ class FireRiskModelAPI:
     def compute_period_delta(self, location: Location, start: datetime, delta: datetime.timedelta) -> FireRiskPrediction:
         pass
 
+'''

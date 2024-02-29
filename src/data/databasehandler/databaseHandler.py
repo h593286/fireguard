@@ -1,3 +1,4 @@
+from src.data.dataTypes import Location
 
 
 
@@ -5,11 +6,11 @@ class DatabaseHandler:
     #def __init__(self):
 
 
-    def checkObservation(self, long, lat, time):
+    def checkObservation(self, location : Location, time):
         #ToDo
         return False
 
-    def getObservation(self, long, lat, time):
+    def getObservation(self, location : Location, time):
         # ToDo
         observation = 'observation'
         return observation
@@ -18,11 +19,11 @@ class DatabaseHandler:
         # ToDo
         return False
 
-    def checkForecast(self, long, lat, time):
+    def checkForecast(self,  location : Location, time):
         # ToDo
         return False
 
-    def getForecast(self, long, lat, time):
+    def getForecast(self,  location : Location, time):
         # ToDo
         return False
 

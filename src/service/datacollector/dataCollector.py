@@ -14,7 +14,7 @@ class DataCollector:
         self.dataExtractor = DataExtractor()
 
 
-    def collectObservation(self, long,lat, time=None):
+    def collectObservation(self, long,lat, time):
 
         # ToDo
         if self.databaseHandler.checkObservation(long,lat,time):

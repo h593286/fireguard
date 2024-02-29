@@ -33,7 +33,7 @@ def root():
 @app.get("/{location}")
 def fire_risk(location: str, response: Response):
 
-    city = api_server_.read_city(location) #TODO: change to show all info about city
+    city = api_server_.read_city(location)
 
     return create_response(city, response, status.HTTP_404_NOT_FOUND)
 

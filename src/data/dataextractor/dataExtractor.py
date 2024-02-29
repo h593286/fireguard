@@ -14,7 +14,7 @@ class DataExtractor:
         self.FrostClient = FrostClient()
         self.METClient = METClient()
 
-    def extractObservation(self, location: Location):
+    def extractObservation(self, location):
         # Take out the necessary elements from the observation and return it
 
         response = FrostClient().sendObservationRequest(location)

@@ -30,7 +30,7 @@ class FireLogic(BaseModel):
                 return c
             
         return None # Return None?
-    
+
     def read_city_by_coordinates(self, latitude: float, longitude: float) -> dict | None:
         
         for c in self.cities:

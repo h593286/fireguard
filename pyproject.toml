@@ -2,9 +2,8 @@
 name = "fireguard"
 version = "0.1.0"
 description = ""
-authors = ["h593286 <593286@stud.hvl.no>"]
+authors = ["MaggeSN <122047522+MaggeSN@users.noreply.github.com>"]
 readme = "README.md"
-packages = [{include = "src"}]
 
 
 [tool.poetry.dependencies]
@@ -17,7 +16,8 @@ pydantic = "^2.6.2"
 numpy = "^1.26.4"
 fastapi = "^0.109.2"
 uvicorn = "^0.27.1"
-pydantic = "^2.6.2"
+
+
 
 
 [tool.poetry.group.dev.dependencies]
@@ -26,3 +26,8 @@ jurigged = "^0.5.7"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+
+
+

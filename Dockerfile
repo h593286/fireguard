@@ -23,8 +23,4 @@ RUN if [ "$ENVIRONMENT" = "Development" ]; \
 COPY src ./src
 COPY ./main.py .
 
-CMD if [ "$ENVIRONMENT" = "Development" ]; then\
-        poetry run python -m jurigged -v main.py --poll 1; \ 
-    else \
-        poetry run python main.py; \
-    fi
+CMD poetry run python main.py

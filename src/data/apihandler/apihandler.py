@@ -41,4 +41,6 @@ class APIHandler:
 
 
 
-
+apiHandler = APIHandler()
+forecast = apiHandler.getForecast(Location(longitude=10, latitude=59))
+print(forecast)

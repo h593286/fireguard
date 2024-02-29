@@ -63,8 +63,6 @@ class DataExtractor:
     def extractForecast(self, response):
         # Take out the necessary elements from the forecast and return it
 
-        response = response.json()
-
         coordinates = response['geometry']['coordinates']
 
         latitude = coordinates[1]

@@ -23,12 +23,9 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(timeseriesobservation.status_code, 200)
 
 
-
-
-
-
     def test_Forcast(self):
-        self.assertTrue(True)
+        forecast = self.apiHandler.getForecast(self.location)
+        self.assertEqual(forecast.status_code, 200)
 
 if __name__ == '__main__':
     unittest.main()

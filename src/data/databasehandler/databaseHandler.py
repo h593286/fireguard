@@ -19,11 +19,11 @@ class DatabaseHandler:
         # ToDo
         return False
 
-    def checkForecast(self,  location : Location, time):
+    def checkForecast(self,  location : Location):
         # ToDo
         return False
 
-    def getForecast(self,  location : Location, time):
+    def getForecast(self,  location : Location):
         # ToDo
         return False
 

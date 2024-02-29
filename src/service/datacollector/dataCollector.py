@@ -37,7 +37,7 @@ class DataCollector:
                 location
             )
         else:
-            forecast = self.apiHandler.getForecast
+            forecast = self.apiHandler.getForecast(location)
             forecast = self.dataExtractor.extractForecast(forecast)
 
         return forecast

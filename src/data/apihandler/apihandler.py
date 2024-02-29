@@ -39,8 +39,3 @@ class APIHandler:
     def getForecast(self, location: Location):
         return self.metClient.sendForecastRequest(location)
 
-
-
-apiHandler = APIHandler()
-forecast = apiHandler.getForecast(Location(longitude=10, latitude=59))
-print(forecast)

@@ -1,4 +1,4 @@
-from src.data.apihandler.apihandler import FrostClient
+from src.data.apihandler.apihandler import APIHandler
 from src.data.dataTypes import *
 import numpy as np
 import dateutil.parser
@@ -10,16 +10,13 @@ from src.data.apihandler.METClient import METClient
 # Extracts the wanted data from the observations and forecasts.
 # Same format for storage
 class DataExtractor:
-    def __init__(self):
-        self.FrostClient = FrostClient()
-        self.METClient = METClient()
 
-    def extractObservation(self, location: Location):
+    def extractObservation(self, response):
         # Take out the necessary elements from the observation and return it
 
-        response = FrostClient().sendObservationRequest(location)
+        response = response.json()
 
-        data_list = response.json()['data']
+        data_list = response['data']
 
         weatherdatapoints = list()
 
@@ -63,10 +60,10 @@ class DataExtractor:
         observations = Observations(source=source_id, location=location, data=weatherdatapoints)
         print(observations)
         return observations
-    def extractForecast(self, location: Location):
+    def extractForecast(self, response):
         # Take out the necessary elements from the forecast and return it
 
-        response = METClient().sendForecastRequest(location).json()
+        response = response.json()
 
         coordinates = response['geometry']['coordinates']
 

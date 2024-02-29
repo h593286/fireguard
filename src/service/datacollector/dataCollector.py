@@ -1,6 +1,8 @@
 from src.data.apihandler.apihandler import APIHandler
 from src.data.databasehandler.databaseHandler import DatabaseHandler
 from src.data.dataextractor.dataExtractor import DataExtractor
+from src.data.dataTypes import Location
+
 
 # Responsible for the flow of data.
 # Uses apihandler to get new observation and forecasts
@@ -14,16 +16,29 @@ class DataCollector:
         self.dataExtractor = DataExtractor()
 
 
-    def collectObservation(self, long,lat, time=None):
+    def collectObservation(self, location : Location, time=None):
 
         # ToDo
-        if self.databaseHandler.checkObservation(long,lat,time):
-            observation = self.databaseHandler.getObservation(long,lat,time)
+        if self.databaseHandler.checkObservation(location,time):
+            observation = self.databaseHandler.getObservation(location,time)
 
         else:
-            observation = self.apiHandler.getObservation(long,lat,time)
+            observation = self.apiHandler.getObservation(location,time)
             observation = self.dataExtractor.extractObservation(observation)
 
             self.databaseHandler.storeObservation(observation) #Stores the 'unseen' observation for potential later use
 
         return observation
+
+    def collectForecast(self, location : Location):
+
+        if self.databaseHandler.checkForecast(location):
+            forecast = self.databaseHandler.getForecast(
+                location
+            )
+        else:
+            forecast = self.apiHandler.getForecast
+            forecast = self.dataExtractor.extractForecast(forecast)
+
+        return forecast
+

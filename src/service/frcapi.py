@@ -13,10 +13,10 @@ class FireRiskModelAPI:
         self.timedelta_ok = datetime.timedelta(days=1)
         self.interpolate_distance = 720
 
-    def compute(self, data: DataCollector, location: Location) -> FireRiskPrediction:
+    def compute(self, location: Location) -> FireRiskPrediction:
         # Get the fire risk prediction
-        observations=data.collectObservation(location)
-        forecast=data.collectForecast(location)
+        observations=self.client.collectObservation(location)
+        forecast=self.client.collectForecast(location)
 
         if isinstance(observations, Observations):
             obs = observations

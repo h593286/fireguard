@@ -64,7 +64,7 @@ class FireLogic(BaseModel):
             source="test", location=location, data=[WeatherDataPoint(temperature=34,humidity=4,wind_speed=2,timestamp=datetime.datetime.now())]), 
             forecast=Forecast(location=location, data=[WeatherDataPoint(temperature=34,humidity=4,wind_speed=2,timestamp=datetime.datetime.now())]))
         '''
-        prediction = self.model_api.compute(self.model_api.client,location=location)
+        prediction = self.model_api.compute(location)
         print(prediction)
         return prediction
     

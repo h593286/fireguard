@@ -49,19 +49,21 @@ def root(body: GetFireRiskRequest, response: Response):
     return create_response(city, response, status.HTTP_404_NOT_FOUND)
 
 
-@app.get("/{location}")
-def fire_risk(location: str, response: Response):
+@app.get("/{city}")
+def fire_risk(city: str, response: Response):
 
-    city = api_server_.read_city(location)
+    city_json = api_server_.read_city(city)
 
-    return create_response(city, response, status.HTTP_404_NOT_FOUND)
+    return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("/fire_risk/{latitude}/{longitude}")
 def fire_risk_lat_long(longitude: float, latitude: float, response: Response):
 
-    city = api_server_.get_firerisk_by_coordinates(latitude, longitude)
-    return create_response(city, response, status.HTTP_404_NOT_FOUND)
+    firerisk = api_server_.get_firerisk_by_coordinates(latitude, longitude)
+    return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
 
-"""@app.get("/fire_risk/{latitude}/{longitude}")
-def fire_risk_lat_long(longitude: float, latitude: float, response: Response):
-    pass"""
+@app.get("/fire_risk/{city}")
+def fire_risk_city(city: str, response: Response):
+
+    firerisk = api_server_.get_firerisk_by_city(city)
+    return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)

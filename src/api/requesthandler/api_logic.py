@@ -13,7 +13,7 @@ class FireLogic(BaseModel):
     #constructor for the FireLogic class
     name: str
     cities: list[dict] 
-    model_api: FireRiskModelAPI
+    modelApi: FireRiskModelAPI
 
     #class Config is used to allow arbitrary types to be used in the class
     class Config:
@@ -22,8 +22,9 @@ class FireLogic(BaseModel):
     # ==============================================================================
     # fireguard logic functions
     # ==============================================================================
-        
-    def read_city(self, city: str):
+    
+    
+    def read_city(self, city: str) -> dict | None:
 
         for c in self.cities:
             if c["city"] == city:
@@ -39,34 +40,28 @@ class FireLogic(BaseModel):
         
         return None # Return None?
     
-    def get_firerisk_by_city(self, city: str):#    city: Location
+    def get_firerisk_by_city(self, city: str)-> FireRiskPrediction:
         
-        city_ = self.read_city(city)
+        city_json = self.read_city(city)
 
-        #TODO: make code robust
+        #TODO: make code robust (add error handling)
 
-        if city_ is not None:
-            latitude = city_["latitude"]
-            longitude = city_["longitude"]
-            return self.get_firerisk_by_coordinates(latitude, longitude)
+        if city_json is not None:
+            latitude = city_json["lat"]
+            longitude = city_json["lng"]
+        
+        location = Location(latitude=latitude, longitude=longitude)
+        prediction = self.modelApi.compute(location)
+        return prediction
 
 
-    def get_firerisk_by_coordinates(self, latitude: float, longitude: float):
+    def get_firerisk_by_coordinates(self, latitude: float, longitude: float) -> FireRiskPrediction:
 
         location = Location(latitude=latitude, longitude=longitude)
-
-        '''
-        obs_delta =  datetime.timedelta(days=2)
-
-        # TODO: Get weatherdata (observations and forecast) from service layer
-
-        wd = WeatherData(created=datetime.datetime.now(), observations=Observations(
-            source="test", location=location, data=[WeatherDataPoint(temperature=34,humidity=4,wind_speed=2,timestamp=datetime.datetime.now())]), 
-            forecast=Forecast(location=location, data=[WeatherDataPoint(temperature=34,humidity=4,wind_speed=2,timestamp=datetime.datetime.now())]))
-        '''
-        prediction = self.model_api.compute(location)
+        prediction = self.modelApi.compute(location)
         print(prediction)
         return prediction
+    
     
 '''    def get_firerisk_by_coordinates_now(self, latitude: float, longitude: float):
         location = Location(latitude=latitude, longitude=longitude)
@@ -77,6 +72,6 @@ class FireLogic(BaseModel):
         return prediction'''
 
     
-        
+
 
 

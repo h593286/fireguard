@@ -3,17 +3,23 @@ import json
 from src.service.datacollector.dataCollector import DataCollector
 from src.service.frcapi import FireRiskModelAPI
 
+# load cities from json file
+def load_cities():
+    with open('./src/api/requesthandler/cities.json','r') as json_raw:
+        json_data = json.load(json_raw)
+
+
+    return json_data
 
 # Build the Fireguard API server
 def Build_Fireguard():
-    json_raw = open('./src/api/requesthandler/cities.json','r')
-    json_data = json.load(json_raw)
 
+    json_data = load_cities()
     service_data = DataCollector()
 
     #cities = [item['city'] for item in json_data]
     frc_model_api = FireRiskModelAPI(service_data) # maybe remove this line and strictly use the DataCollector class
-    api_server_ = FireLogic(name = "Fireguard", cities=json_data, model_api=frc_model_api)
+    api_server_ = FireLogic(name = "Fireguard", cities=json_data, modelApi=frc_model_api)
     
 
     return api_server_

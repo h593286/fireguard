@@ -1,0 +1,38 @@
+name: Python project test
+
+on:
+  pull_request:
+    branches: [ 'main' ]
+  push:
+    branches: [ 'main' ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    
+    - name: Install poetry
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install --user pipx
+        pipx install poetry
+
+    - name: Install project dependencies
+      run: |
+        poetry install
+    - name: Run tests
+      env:
+        MET_CLIENT_ID: ${{ secrets.MET_CLIENT_ID }}
+        MET_CLIENT_SECRET: ${{ secrets.MET_CLIENT_SECRET }}
+      run:
+        poetry run pytest
+        

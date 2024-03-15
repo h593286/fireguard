@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 import datetime 
 from src.service.datacollector.dataCollector import *
 from src.service.frcapi import *
@@ -11,13 +11,14 @@ class FireLogic(BaseModel):
     """The FireLogic class is a pydantic model that is used to represent the logic of the fireguard service."""
     
     #constructor for the FireLogic class
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+    
     name: str
     cities: list[dict] 
     modelApi: FireRiskModelAPI
 
     #class Config is used to allow arbitrary types to be used in the class
-    class Config:
-        arbitrary_types_allowed = True
+    
 
     # ==============================================================================
     # fireguard logic functions
@@ -35,9 +36,9 @@ class FireLogic(BaseModel):
     def read_city_by_coordinates(self, latitude: float, longitude: float) -> dict | None:
         
         for c in self.cities:
-            if c["latitude"] == latitude and c["longitude"] == longitude:
+            if round(float(c["lat"]),4) == round(latitude,4) and round(float(c["lng"]),4) == round(longitude,4):
                 return c
-        
+
         return None # Return None?
     
     def get_firerisk_by_city(self, city: str)-> FireRiskPrediction:

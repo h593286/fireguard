@@ -50,10 +50,16 @@ def root(body: GetFireRiskRequest, response: Response):
 
 
 @app.get("/{city}")
-def fire_risk(city: str, response: Response):
+def city(city: str, response: Response):
 
     city_json = api_server_.read_city(city)
 
+    return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
+
+@app.get("/{latitude}/{longitude}")
+def city_from_coordinates(latitude: float, longitude: float, response: Response):
+
+    city_json = api_server_.read_city_by_coordinates(latitude, longitude)
     return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("/fire_risk/{latitude}/{longitude}")

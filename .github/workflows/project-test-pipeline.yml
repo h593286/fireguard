@@ -43,8 +43,8 @@ jobs:
         poetry install
     - name: Run tests
       env:
-        MET_CLIENT_ID: ${{ secrets.MET_CLIENT_ID }}
-        MET_CLIENT_SECRET: ${{ secrets.MET_CLIENT_SECRET }}
+        FROST_CLIENT_ID: ${{ secrets.FROST_CLIENT_ID }}
+        FROST_CLIENT_SECRET: ${{ secrets.FROST_CLIENT_SECRET }}
       run:
         poetry run python3 -m unittest
         

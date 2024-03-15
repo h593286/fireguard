@@ -10,7 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  runTests:
+    name: Run Tests for projects
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -34,5 +35,5 @@ jobs:
         MET_CLIENT_ID: ${{ secrets.MET_CLIENT_ID }}
         MET_CLIENT_SECRET: ${{ secrets.MET_CLIENT_SECRET }}
       run:
-        poetry run py -m unittest
+        poetry run python3 -m unittest
         

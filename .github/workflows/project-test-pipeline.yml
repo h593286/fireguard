@@ -34,5 +34,5 @@ jobs:
         MET_CLIENT_ID: ${{ secrets.MET_CLIENT_ID }}
         MET_CLIENT_SECRET: ${{ secrets.MET_CLIENT_SECRET }}
       run:
-        poetry run pytest
+        poetry run py -m unittest
         

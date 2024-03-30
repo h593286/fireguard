@@ -1,3 +1,4 @@
+from datetime import datetime
 from src.data.apihandler.apihandler import APIHandler
 from src.data.databasehandler.databaseHandler import DatabaseHandler
 from src.data.dataextractor.dataExtractor import DataExtractor
@@ -16,17 +17,20 @@ class DataCollector:
         self.dataExtractor = DataExtractor()
 
 
-    def collectObservation(self, location : Location, time='latest'):
+    def collectObservation(self, location : Location, time: datetime | None = None):
+        
+        if time is None:
+            time = datetime.now()
 
         # ToDo
-        if self.databaseHandler.checkObservation(location,time):
-            observation = self.databaseHandler.getObservation(location,time)
+        if (observation := self.databaseHandler.getObservation(location,time)) is not None:
+            return observation
 
         else:
             observation = self.apiHandler.getObservation(location,time)
             observation = self.dataExtractor.extractObservation(observation, location)
 
-            self.databaseHandler.storeObservation(observation) #Stores the 'unseen' observation for potential later use
+            self.databaseHandler.storeObservations(observation.data) #Stores the 'unseen' observation for potential later use
 
         return observation
 

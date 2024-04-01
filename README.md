@@ -11,6 +11,10 @@ docker compose -f docker-compose.yml -f docker-compose.development.yml up
 
 ## Get bearer token for protected endpoints:
 for auth token, use postman or:
+(need .env in api/authentication: "# keycloak
+server_url=http://keycloak:8090/
+realm=fireguard
+token=")
 
 ```shell
 export token=$(\

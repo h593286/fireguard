@@ -18,14 +18,15 @@ from src/api/authentication/keycloak-23.0.7 run:
 ```
 
 (.bat for windows, .sh for mac/linux)
+ (username= admin, password= admin)
 
-[http://localhost:8090] (username= admin, password= admin)
+[http://localhost:8090](http://127.0.0.1:8090)
 
 for auth token, use postman or:
 
 ```shell
 export token=$(\
-curl -X POST http://{IP-address}:8080/realms/SmartOcean/protocol/openid-connect/token \
+curl -X POST http://localhost:8090/realms/fireguard/protocol/openid-connect/token \
 -d 'client_id=fireguard_client' \
 -d 'username=admin&password=admin&grant_type=password'| jq --raw-output '.access_token' \
 )

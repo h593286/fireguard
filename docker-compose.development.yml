@@ -4,4 +4,4 @@ services:
       args:
         - ENVIRONMENT=Development
     volumes:
-      - ./src:/app/src:ro
+      - ./src:/app/src

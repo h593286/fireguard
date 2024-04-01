@@ -1,0 +1,8 @@
+FROM python:3.11-alpine
+FROM openjdk:17-jdk-alpine
+
+COPY ./src/api/authentication/keycloak-23.0.7 /keycloak-23.0.7
+
+WORKDIR /keycloak-23.0.7
+
+CMD ["./bin/kc.sh", "start-dev", "--http-port", "8090"]

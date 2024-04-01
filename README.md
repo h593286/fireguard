@@ -9,19 +9,7 @@ docker compose -f docker-compose.yml -f docker-compose.development.yml up
 
 [http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)
 
-## Run keycloak server:
-
-from src/api/authentication/keycloak-23.0.7 run:
-
-```haskell
-    bin/kc.sh start-dev --http-port 8090
-```
-
-(.bat for windows, .sh for mac/linux)
- (username= admin, password= admin)
-
-[http://localhost:8090](http://127.0.0.1:8090)
-
+## Get bearer token for protected endpoints:
 for auth token, use postman or:
 
 ```shell

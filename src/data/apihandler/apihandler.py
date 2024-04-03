@@ -1,10 +1,8 @@
-from typing import Any
 from src.data.apihandler.frostClient import FrostClient
 from src.data.apihandler.METClient import METClient
 
 
 from datetime import date, datetime
-from collections.abc import Iterable
 from src.data.apihandler import util
 from src.data.dataTypes import Location
 

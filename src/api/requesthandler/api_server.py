@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Response, status
+from os import getenv
+from fastapi import FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from src.api.requesthandler.buildFireguardAPI import Build_Fireguard
 from pydantic import BaseModel
@@ -44,7 +45,9 @@ class GetFireRiskRequest(BaseModel):
     location: Location
 
 @app.post("/fire_risk")
-def root(body: GetFireRiskRequest, response: Response):
+async def root(request: Request, response: Response):
+    json = await request.json()
+    body = GetFireRiskRequest(**json)
     city = api_server_.get_firerisk_by_coordinates(body.location.latitude, body.location.longitude)
     return create_response(city, response, status.HTTP_404_NOT_FOUND)
 
@@ -73,3 +76,5 @@ def fire_risk_city(city: str, response: Response):
 
     firerisk = api_server_.get_firerisk_by_city(city)
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
+
+print("startin api in", getenv("ENVIRONMENT"), "mode", sep=" ")

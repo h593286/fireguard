@@ -1,6 +1,7 @@
 from datetime import datetime
 from src.data.apihandler.apihandler import APIHandler
 from src.data.databasehandler.databaseHandler import DatabaseHandler
+from src.data.databasehandler.mongodb import MongoDbHandler
 from src.data.dataextractor.dataExtractor import DataExtractor
 from src.data.dataTypes import Location
 
@@ -13,7 +14,7 @@ from src.data.dataTypes import Location
 class DataCollector:
     def __init__(self):
         self.apiHandler = APIHandler()
-        self.databaseHandler = DatabaseHandler()
+        self.databaseHandler: DatabaseHandler = MongoDbHandler()
         self.dataExtractor = DataExtractor()
 
 
@@ -30,7 +31,7 @@ class DataCollector:
             observation = self.apiHandler.getObservation(location,time)
             observation = self.dataExtractor.extractObservation(observation, location)
 
-            self.databaseHandler.storeObservations(observation.data) #Stores the 'unseen' observation for potential later use
+            self.databaseHandler.storeObservations(location, observation.data) #Stores the 'unseen' observation for potential later use
 
         return observation
 

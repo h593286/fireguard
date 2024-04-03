@@ -1,0 +1,9 @@
+POST http://127.0.0.1:8080/fire_risk HTTP/1.1
+Content-Type: 'application/json'
+
+{
+    "location": {
+        "longitude": 5.3300,
+        "latitude": 60.3894
+    }
+}

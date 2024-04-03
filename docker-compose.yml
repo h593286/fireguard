@@ -11,7 +11,7 @@ services:
       - 8081:443
   mongodb:
     image: mongodb/mongodb-community-server:4.4.9-ubuntu2004
-    restart: always,
+    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=username
       - MONGO_INITDB_ROOT_PASSWORD=password

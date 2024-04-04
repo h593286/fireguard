@@ -1,8 +1,8 @@
 # Fireguard
  An ADA504 group-project
----
- Done by Fredrik Fluge, Daniel Gunleiksrud, Magnus Noreide and Eilert Skram
----
+
+*Done by Fredrik Fluge, Daniel Gunleiksrud, Magnus Noreide and Eilert Skram*
+
 
 
 # Instructions 

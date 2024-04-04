@@ -7,7 +7,7 @@
 docker compose -f docker-compose.yml -f docker-compose.development.yml up
 ```
 
-[http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)
+[http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)[http://127.0.0.1:8090](http://127.0.0.1:8090)
 
 ## Get bearer token for protected endpoints:
 for auth token, use postman or:

@@ -1,12 +1,23 @@
-# fireguard
- ADA504 project
+# Fireguard
+ An ADA504 group-project
+---
+ Done by Fredrik Fluge, Daniel Gunleiksrud, Magnus Noreide and Eilert Skram
+---
+
+
+# Instructions 
+
+To replicate the project and to run it on your own device, please follow the instructions below
 
 ## Clone GitHub project
 Frist clone the GitHub project.
-If unsure how to do this, follow this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
+If you are unsure on how to do this, follow this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
 ## Add Frost Client-Id and Secret in GitHub
-This is done by doing the following
+Now you need to add your Frost Client-Id and Frost Client-Secret
+
+This is done by doing the following steps:
 - Enter the cloned repository
 - Click *Settings*
 - Click *Secrets and Variables*

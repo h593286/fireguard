@@ -9,12 +9,12 @@
 
 To replicate the project and to run it on your own device, please follow the instructions below
 
-## Clone GitHub project
+## 1. Clone GitHub project
 Frist clone the GitHub project.
 
 If you are unsure on how to do this, follow this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
-## Add Frost Client-Id and Secret in GitHub
+## 2. Add Frost Client-Id and Secret in GitHub
 Now you need to add your Frost Client-Id and Frost Client-Secret
 
 This is done by doing the following steps:
@@ -27,14 +27,14 @@ This is done by doing the following steps:
 - Press *Add Secret*
 - Repeat process, but now for *FROST_CLIENT_SECRET*
 
-## Spin up development application
+## 3. Spin up development application
 ```haskell
 docker compose -f docker-compose.yml -f docker-compose.development.yml up
 ```
 
 [http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)
 
-## Run keycloak server:
+## 4. Run keycloak server:
 
 from src/api/authentication/keycloak-23.0.7 run:
 

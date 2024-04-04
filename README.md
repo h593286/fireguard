@@ -32,22 +32,14 @@ This is done by doing the following steps:
 docker compose -f docker-compose.yml -f docker-compose.development.yml up
 ```
 
-[http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)
+[http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)[http://127.0.0.1:8090](http://127.0.0.1:8090)
 
-## 4. Run keycloak server:
-
-from src/api/authentication/keycloak-23.0.7 run:
-
-```haskell
-    bin/kc.sh start-dev --http-port 8090
-```
-
-(.bat for windows, .sh for mac/linux)
- (username= admin, password= admin)
-
-[http://localhost:8090](http://127.0.0.1:8090)
-
+## Get bearer token for protected endpoints:
 for auth token, use postman or:
+(need .env in api/authentication: "# keycloak
+server_url=http://keycloak:8090/
+realm=fireguard
+token=")
 
 ```shell
 export token=$(\

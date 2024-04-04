@@ -4,7 +4,7 @@ from src.service.datacollector.dataCollector import DataCollector
 from src.service.frcapi import FireRiskModelAPI
 
 # load cities from json file
-def load_cities():
+def load_cities() -> list:
     with open('./src/api/requesthandler/cities.json','r') as json_raw:
         json_data = json.load(json_raw)
 

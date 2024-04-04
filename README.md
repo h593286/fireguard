@@ -1,6 +1,20 @@
 # fireguard
  ADA504 project
 
+## Clone GitHub project
+Frist clone the GitHub project.
+If unsure how to do this, follow this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
+
+## Add Frost client-key and secret in GitHub
+This is done by doing the following
+- Enter the cloned repository
+- Click *Settings*
+- Click *Secrets and Variables*
+- Click *Actions*
+- In *Actions*, press *New Repository Secret*
+- Put name as *FROST_CLIENT_ID* and value as your Frost Client-Id
+- Press *Add Secret*
+- Repeat process, but now for *FROST_CLIENT_SECRET*
 
 ## Spin up development application
 ```haskell

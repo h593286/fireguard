@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, UTC
 from src.data.apihandler.apihandler import APIHandler
 from src.data.databasehandler.databaseHandler import DatabaseHandler
 from src.data.databasehandler.mongodb import MongoDbHandler
@@ -21,28 +21,30 @@ class DataCollector:
     def collectObservation(self, location : Location, time: datetime | None = None):
         
         if time is None:
-            time = datetime.now()
+            time = datetime.now(UTC)
 
         # ToDo
         if (observation := self.databaseHandler.getObservation(location,time)) is not None:
+            print("cache hit obs")
             return observation
 
         else:
             observation = self.apiHandler.getObservation(location,time)
             observation = self.dataExtractor.extractObservation(observation, location)
-
+            print(location, observation.data)
             self.databaseHandler.storeObservations(location, observation.data) #Stores the 'unseen' observation for potential later use
 
         return observation
 
     def collectForecast(self, location : Location):
 
-        if self.databaseHandler.checkForecast(location):
-            forecast = self.databaseHandler.getForecast(
-                location
-            )
+        if (forecast := self.databaseHandler.getForecast(location)) is not None:
+            print("cache hit fore")
+            return forecast
         else:
             forecast = self.apiHandler.getForecast(location)
             forecast = self.dataExtractor.extractForecast(forecast)
+
+            self.databaseHandler.storeForecast(forecast)
 
         return forecast

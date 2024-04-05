@@ -58,7 +58,6 @@ class DataExtractor:
 
         # TODO: maybe also source as part of the parameters - or extract weather data function instead
         observations = Observations(source=source_id, location=location, data=weatherdatapoints)
-        print(observations)
         return observations
     def extractForecast(self, response):
         # Take out the necessary elements from the forecast and return it

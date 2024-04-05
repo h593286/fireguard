@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing_extensions import deprecated
-from src.data.dataTypes import Location, WeatherDataPoint
+from src.data.dataTypes import Forecast, Location, Observations, WeatherDataPoint
 
 
 class DatabaseHandler:
@@ -27,7 +27,7 @@ class DatabaseHandler:
         """
         raise NotImplementedError("getObservations is not implemented")
 
-    def getObservation(self, location : Location, time: datetime) -> WeatherDataPoint | None:
+    def getObservation(self, location : Location, time: datetime) -> Observations | None:
         """Retrieves an observation if it's present in the database
 
         Args:
@@ -42,29 +42,24 @@ class DatabaseHandler:
         raise NotImplementedError("getObservation is not implemented")
 
 
-    def storeObservations(self, location: Location, observatins: list[WeatherDataPoint]):
+    def storeObservations(self, location: Location, observations: list[WeatherDataPoint]):
         """Stores a list of observations to the database
 
         Args:
         ----
-            observatins (list[WeatherDataPoint]): The observations to store
+            observations (list[WeatherDataPoint]): The observations to store
+
+        Returns:
+        -------
+            (bool): wether the store operation was successfull
         """
-        raise BaseException("Not implemented exception")
+        raise BaseException("storeObservations is not implemented")
 
-    def storeObservation(self, observation: WeatherDataPoint):
+    def getForecast(self,  location : Location) -> Forecast | None:
         # ToDo
-        return False
+        raise BaseException("getForecast is not implemented")
 
-
-    def checkForecast(self,  location : Location):
-        # ToDo
-        return False
-
-    def getForecast(self,  location : Location):
-        # ToDo
-        return False
-
-    def storeForecast(self, forecast):
+    def storeForecast(self, forecast: Forecast) -> bool:
         # ToDo
         return False
 

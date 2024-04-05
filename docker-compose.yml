@@ -9,7 +9,8 @@ services:
     ports:
       - 8080:80
       - 8081:443
-  mongodb:
+  fireguard.database:
+    container_name: "fireguard-database"
     image: mongodb/mongodb-community-server:4.4.9-ubuntu2004
     restart: always
     environment:

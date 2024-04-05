@@ -1,3 +1,15 @@
+### Stavanger
+POST http://127.0.0.1:8080/fire_risk HTTP/1.1
+Content-Type: 'application/json'
+
+{
+    "location": {
+        "longitude": 5.7314,
+        "latitude": 58.9700
+    }
+}
+
+### Bergen
 POST http://127.0.0.1:8080/fire_risk HTTP/1.1
 Content-Type: 'application/json'
 

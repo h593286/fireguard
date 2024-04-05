@@ -14,27 +14,24 @@ Clone the GitHub project.
 
 If you are unsure on how to do this, follow this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
-## 2. Add Frost Client-Id and Secret in GitHub
-Now you need to add your Frost Client-Id and Frost Client-Secret.
+## 2. Add the .env file to the project
+the `.env` file should be placed in the folder `src/data/apihandler/`, and contain the following values
+```env
+FROST_CLIENT_ID=<your client id>
+FROST_CLIENT_SECRET=<your client secret>
 
-This is done by doing the following steps:
-- Enter the cloned repository
-- Click *Settings*
-- Click *Secrets and Variables*
-- Click *Actions*
-- In *Actions*, press *New Repository Secret*
-- Put **name** as *FROST_CLIENT_ID* and **value** as your personal Frost Client-Id
-- Press *Add Secret*
-- Repeat process, but now for *FROST_CLIENT_SECRET*
+MONGO_DB_CONNECTION_STRING=mongodb://username:password@fireguard-database:27017/admin?retryWrites=true&loadBalanced=false&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1
+```
 
 ## 3. Spin up development application
 ```haskell
 docker compose -f docker-compose.yml -f docker-compose.development.yml up
 ```
-API
-[http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)
 
-Autentisering
+API server
+[http://127.0.0.1:8080/](http://127.0.0.1:8080)
+
+Authorization server
 [http://127.0.0.1:8090](http://127.0.0.1:8090)
 
 ## Get bearer token for protected endpoints:
@@ -56,3 +53,9 @@ then, use token on one of the protected endpoints (postman or shell):
 ```shell
 curl http://localhost:8080/60.3894/5.3300 -H "Authorization: Bearer "$token
 ```
+using Visual studio's Rest client extension
+```rest
+POST http://localhost:8080/60.3894/5.3300
+Authorization: 'Bearer <your pasted token>'
+```
+

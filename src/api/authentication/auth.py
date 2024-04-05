@@ -1,12 +1,15 @@
 from fastapi import Request, Depends, HTTPException, status
 from keycloak import KeycloakOpenID
 from decouple import config
+from dotenv import load_dotenv
+import os
 
 from src.api.authentication.User import User
+load_dotenv()
 
 keycloak_openid = KeycloakOpenID(
-    server_url=config("server_url"),
-    realm_name=config("realm"),
+    server_url=os.getenv('KEYCLOAK_SERVER_URL'),
+    realm_name=os.getenv('KEYCLOAK_REALM_NAME'),
     client_id=""
 
 )

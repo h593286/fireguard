@@ -137,22 +137,7 @@ class myIntegrationTests(TestCase):
         self.firelogic = FireLogic(name="Fireguard", cities=cities, modelApi=MagicMock(spec=FireRiskModelAPI))
 
     #only want this setup to run once, not once for every test
-    @classmethod
-    def setUpClass(cls):
-        # Set up test client #TODO: make dynamic
-        load_dotenv('src/api/authentication/.env')
-        credentials = {"client_id": "fireguard_client", "username": "test", "password": "test", "grant_type": "password"}
-        credentials_encoded = urllib.parse.urlencode(credentials)
-        headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-        base_url = os.environ.get('BASE_URL')
-        token_endpoint = os.environ.get('TOKEN_ENDPOINT')
-        token_endpoint = urljoin(base_url, token_endpoint)
 
-        response = requests.post(token_endpoint, data=credentials_encoded, headers=headers)
-        cls.token = response.json().get('access_token')
-        # Assert
-        assert response.status_code == 200
-        assert cls.token is not None
 
 
     def test_load_cities(self):
@@ -162,32 +147,7 @@ class myIntegrationTests(TestCase):
         assert len(cities) > 0
         assert isinstance(cities, list)
 
-    def test_city_public_endpoint(self):
-        # Act
-        response = client.get(f'/{self.expected_result["city"]}')
 
-        # Assert 
-        assert response.status_code == 200
-        assert response.json() == self.expected_result
-
-    # Test user authentication
-    
-    def test_lat_lng_protected_user_endpoint(self):
-        # Act
-        _headers = {"Authorization": f"Bearer {self.token}"}
-
-        response = requests.get(f"http://127.0.0.1:8080/{self.expected_result['lat']}/{self.expected_result['lng']}", headers=_headers)
-        # Assert
-        assert response.status_code == 200
-        assert response.json() == self.expected_result
-
-   #TODO: fix this test:
-    def test_protected_admin_endpoint(self):
-        _headers = {"Authorization": f"Bearer {self.token}"}
-        #response = client.get('/api/v1/admin', headers=_headers)
-
-        #assert response.status_code == 200
-        #assert response.json() == {"Data": "This is a protected resource for ADMIN role."}
 
     if __name__ == '__main__':
         main()

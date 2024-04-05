@@ -62,7 +62,7 @@ class FireLogic(BaseModel):
 
         location = Location(latitude=latitude, longitude=longitude)
         prediction = self.modelApi.compute(location)
-        print(prediction)
+        #print(prediction)
         return prediction
     
 '''    

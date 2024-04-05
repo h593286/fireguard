@@ -1,5 +1,7 @@
+from datetime import datetime, UTC
 from src.data.apihandler.apihandler import APIHandler
 from src.data.databasehandler.databaseHandler import DatabaseHandler
+from src.data.databasehandler.mongodb import MongoDbHandler
 from src.data.dataextractor.dataExtractor import DataExtractor
 from src.data.dataTypes import Location
 
@@ -12,32 +14,37 @@ from src.data.dataTypes import Location
 class DataCollector:
     def __init__(self):
         self.apiHandler = APIHandler()
-        self.databaseHandler = DatabaseHandler()
+        self.databaseHandler: DatabaseHandler = MongoDbHandler()
         self.dataExtractor = DataExtractor()
 
 
-    def collectObservation(self, location : Location, time='latest'):
+    def collectObservation(self, location : Location, time: datetime | None = None):
+        
+        if time is None:
+            time = datetime.now(UTC)
 
         # ToDo
-        if self.databaseHandler.checkObservation(location,time):
-            observation = self.databaseHandler.getObservation(location,time)
+        if (observation := self.databaseHandler.getObservation(location,time)) is not None:
+            print("cache hit obs")
+            return observation
 
         else:
             observation = self.apiHandler.getObservation(location,time)
             observation = self.dataExtractor.extractObservation(observation, location)
-
-            self.databaseHandler.storeObservation(observation) #Stores the 'unseen' observation for potential later use
+            print(location, observation.data)
+            self.databaseHandler.storeObservations(location, observation.data) #Stores the 'unseen' observation for potential later use
 
         return observation
 
     def collectForecast(self, location : Location):
 
-        if self.databaseHandler.checkForecast(location):
-            forecast = self.databaseHandler.getForecast(
-                location
-            )
+        if (forecast := self.databaseHandler.getForecast(location)) is not None:
+            print("cache hit fore")
+            return forecast
         else:
             forecast = self.apiHandler.getForecast(location)
             forecast = self.dataExtractor.extractForecast(forecast)
+
+            self.databaseHandler.storeForecast(forecast)
 
         return forecast

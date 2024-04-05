@@ -3,7 +3,6 @@ from src.data.apihandler.METClient import METClient
 
 
 from datetime import date, datetime
-from collections.abc import Iterable
 from src.data.apihandler import util
 from src.data.dataTypes import Location
 
@@ -15,18 +14,18 @@ class APIHandler:
         self.metClient = METClient()
 
 
-    def getObservation(self, location: Location, time ='latest'):
+    def getObservation(self, location: Location, time: list[datetime] | datetime | str ='latest'):
 
         # Default value
         if time == 'latest':
-            formatted_time = time
+            formatted_time: str = 'latest'
 
         # single value
         elif isinstance(time, (datetime, date)):
             formatted_time = util.format_date(time)
 
         # Time series
-        elif isinstance(time, Iterable) and len(time) == 2 and all(
+        elif isinstance(time, list) and len(time) == 2 and all(
                 isinstance(t, (datetime, date)) for t in time):
             start, end = time
             formatted_time = util.format_period(start, end)

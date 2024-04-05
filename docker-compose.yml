@@ -9,6 +9,15 @@ services:
     ports:
       - 8080:80
       - 8081:443
+  fireguard.database:
+    container_name: "fireguard-database"
+    image: mongodb/mongodb-community-server:4.4.9-ubuntu2004
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=username
+      - MONGO_INITDB_ROOT_PASSWORD=password
+    ports:
+      - 27017:27017
 
   keycloak:
     container_name: keycloak

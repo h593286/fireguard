@@ -1,20 +1,21 @@
-import datetime
-
+from datetime import timedelta, datetime
+from time import time
 import src.service.TTFmodel.compute as computeTTF
 
 
-from src.service.datacollector.dataCollector import *
-from src.data.dataTypes import *
+from src.service.datacollector.dataCollector import DataCollector
+from src.data.dataTypes import Location, FireRiskPrediction, Observations, Forecast, WeatherData
 
 class FireRiskModelAPI:
 
     def __init__(self, client: DataCollector) -> None:
         self.client = client
-        self.timedelta_ok = datetime.timedelta(days=1)
+        self.timedelta_ok = timedelta(days=1)
         self.interpolate_distance = 720
 
     def compute(self, location: Location) -> FireRiskPrediction:
         # Get the fire risk prediction
+        start = time()
         observations=self.client.collectObservation(location)
         forecast=self.client.collectForecast(location)
 
@@ -24,8 +25,13 @@ class FireRiskModelAPI:
         if isinstance(forecast, Forecast):
             fct = forecast
 
-        wd = WeatherData(created=datetime.datetime.now(), observations=obs, forecast=fct)
-        return computeTTF.compute(wd)
+        obs_fetch = time()
+        print("data fetching time: ", obs_fetch - start)
+        wd = WeatherData(created=datetime.now(), observations=obs, forecast=fct)
+        value = computeTTF.compute(wd)
+        computation = time()
+        print("computation time: ", computation - obs_fetch)
+        return value
 ''' 
     def compute_now(self, location: Location, obs_delta: datetime.timedelta) -> FireRiskPrediction:
 

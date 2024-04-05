@@ -1,6 +1,6 @@
 import requests
 from dotenv import load_dotenv
-from src.data.dataTypes import *
+from src.data.dataTypes import Location
 import os
 
 load_dotenv()
@@ -9,9 +9,15 @@ load_dotenv()
 # Only gets the observation, does not format it
 class METClient:
     def __init__(self):
-        self.FROST_CLIENT_ID = os.getenv('FROST_CLIENT_ID')
-        self.FROST_CLIENT_SECRET = os.getenv('FROST_CLIENT_SECRET')
+        self.FROST_CLIENT_ID: str = os.getenv('FROST_CLIENT_ID') # type: ignore
+        self.FROST_CLIENT_SECRET: str = os.getenv('FROST_CLIENT_SECRET') # type: ignore
+
         self.forecastEndpoint = 'https://api.met.no/weatherapi/locationforecast/2.0/compact'
+        if self.FROST_CLIENT_ID is None:
+            raise BaseException("missing environment secrets for frost client id")
+        
+        if self.FROST_CLIENT_SECRET is None:
+            raise BaseException("missing environment secrets for frost client secret")
 
     def sendForecastRequest(self,  location: Location):
 

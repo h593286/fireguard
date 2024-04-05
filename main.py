@@ -1,7 +1,7 @@
-import uvicorn
-import sys
+from uvicorn import run
+from os import getenv
 
 
 
 if __name__ == "__main__":
-    uvicorn.run("src.api.requesthandler.api_server:app", port=80, host="0.0.0.0", reload=True)
+    run("src.api.requesthandler.api_server:app", port=80, host="0.0.0.0", reload=getenv("ENVIRONMENT") == "Development")

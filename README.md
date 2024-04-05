@@ -1,21 +1,21 @@
 # Fireguard
  An ADA504 group-project
 
-*By Fredrik Fluge, Daniel Gunleiksrud, Magnus Noreide and Eilert Skram*
+*By Fredrik Fluge, Daniel K.Gunleiksrud, Magnus Noreide and Eilert Skram*
 
 
 
 # Instructions 
 
-To replicate the project and to run it on your own device, please follow the instructions below
+To replicate the project and to run it on your own device, please follow the instructions below.
 
 ## 1. Clone GitHub project
-Frist clone the GitHub project.
+Clone the GitHub project.
 
 If you are unsure on how to do this, follow this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
 ## 2. Add Frost Client-Id and Secret in GitHub
-Now you need to add your Frost Client-Id and Frost Client-Secret
+Now you need to add your Frost Client-Id and Frost Client-Secret.
 
 This is done by doing the following steps:
 - Enter the cloned repository
@@ -32,7 +32,8 @@ This is done by doing the following steps:
 docker compose -f docker-compose.yml -f docker-compose.development.yml up
 ```
 
-[http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)[http://127.0.0.1:8090](http://127.0.0.1:8090)
+[http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)
+[http://127.0.0.1:8090](http://127.0.0.1:8090)
 
 ## Get bearer token for protected endpoints:
 for auth token, use postman or:

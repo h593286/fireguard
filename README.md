@@ -31,8 +31,10 @@ This is done by doing the following steps:
 ```haskell
 docker compose -f docker-compose.yml -f docker-compose.development.yml up
 ```
-
+API
 [http://127.0.0.1:8080/](http://127.0.0.1:8080/index.html)
+
+Autentisering
 [http://127.0.0.1:8090](http://127.0.0.1:8090)
 
 ## Get bearer token for protected endpoints:

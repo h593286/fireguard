@@ -1,9 +1,15 @@
 from os import getenv
-from fastapi import FastAPI, Request, Response, status
+from fastapi import FastAPI, Request, Response, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from src.api.requesthandler.buildFireguardAPI import Build_Fireguard
 from pydantic import BaseModel
+from datetime import datetime
+from typing import Optional
+
+from src.api.authentication.auth import verify_user_role, verify_admin_role
+from src.api.requesthandler.buildFireguardAPI import Build_Fireguard
 from src.data.dataTypes import Location
+
+
 
 api_server_ = Build_Fireguard() # Calls function that builds the fireguard API server
 
@@ -60,19 +66,20 @@ def city(city: str, response: Response):
     return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("/{latitude}/{longitude}")
-def city_from_coordinates(latitude: float, longitude: float, response: Response):
+def city_from_coordinates(latitude: float, longitude: float, response: Response, user: bool = Depends(verify_user_role)):
+#def city_from_coordinates(latitude: float, longitude: float, response: Response):
 
     city_json = api_server_.read_city_by_coordinates(latitude, longitude)
     return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("/fire_risk/{latitude}/{longitude}")
-def fire_risk_lat_long(longitude: float, latitude: float, response: Response):
+def fire_risk_lat_long(longitude: float, latitude: float, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
 
-    firerisk = api_server_.get_firerisk_by_coordinates(latitude, longitude)
+    firerisk = api_server_.get_firerisk_by_coordinates(latitude, longitude, ts)
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("/fire_risk/{city}")
-def fire_risk_city(city: str, response: Response):
+def fire_risk_city(city: str, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
 
     firerisk = api_server_.get_firerisk_by_city(city)
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)

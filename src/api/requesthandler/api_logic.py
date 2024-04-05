@@ -1,17 +1,17 @@
 from pydantic import BaseModel, ConfigDict
 import datetime 
-from src.service.datacollector.dataCollector import *
-from src.service.frcapi import *
+from typing import Optional
+
+from src.service.frcapi import FireRiskModelAPI, FireRiskPrediction, Location
 
 
 
-# from fireguard.data.dataextractor.dataExtractor import Location
 
 class FireLogic(BaseModel):
     """The FireLogic class is a pydantic model that is used to represent the logic of the fireguard service."""
-    
+
     #constructor for the FireLogic class
-    model_config = ConfigDict(arbitrary_types_allowed=True)
+    model_config = ConfigDict(arbitrary_types_allowed=True,extra="allow")
     
     name: str
     cities: list[dict] 
@@ -56,22 +56,24 @@ class FireLogic(BaseModel):
         return prediction
 
 
-    def get_firerisk_by_coordinates(self, latitude: float, longitude: float) -> FireRiskPrediction:
+    def get_firerisk_by_coordinates(self, latitude: float, longitude: float, ts: Optional[datetime.datetime] = None) -> FireRiskPrediction:
+
+        #TODO: add code for handling ts
 
         location = Location(latitude=latitude, longitude=longitude)
         prediction = self.modelApi.compute(location)
         #print(prediction)
         return prediction
     
-    
-'''    def get_firerisk_by_coordinates_now(self, latitude: float, longitude: float):
+'''    
+    def get_firerisk_by_coordinates_now(self, latitude: float, longitude: float):
         location = Location(latitude=latitude, longitude=longitude)
 
         obs_delta =  datetime.timedelta(days=2)
-        prediction = self.model_api.compute_now(location, obs_delta)
+        prediction = self.modelApi.compute_now(location, obs_delta)
 
-        return prediction'''
-
+        return prediction
+        '''
     
 
 

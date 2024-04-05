@@ -1,32 +1,31 @@
 from src.data.dataTypes import Location
-
+from src.data.databasehandler.observationHandler import ObservationHandler
+from src.data.databasehandler.TTFhandler import TTFhandler
 
 
 class DatabaseHandler:
-    #def __init__(self):
+    def __init__(self):
+        self.obsHandler = ObservationHandler()
+        self.TTFhandler = TTFhandler()
 
 
-    def checkObservation(self, location : Location, time):
-        #ToDo
+    def getTTF(self, location: Location, time):
+        #Todo
+        #if self.TTFhandler.checkTFF(location, time):
+        #    return self.TTFhandler.getTTF(location, time)
+        #else:
+        #    return False
+
         return False
 
-    def getObservation(self, location : Location, time):
-        # ToDo
-        observation = 'observation'
-        return observation
-
-    def storeObservation(self, observation):
-        # ToDo
+    def getObservation(self, location: Location, time):
         return False
+        #TODO
+        #if todays date > time
+        #    return self.obsHandler.getObservation(location, time)
+        #
+        #else:
+        #    return self.obsHandler.getForcast(location, time)
 
-    def checkForecast(self,  location : Location):
-        # ToDo
-        return False
 
-    def getForecast(self,  location : Location):
-        # ToDo
-        return False
 
-    def storeForecast(self, forecast):
-        # ToDo
-        return False

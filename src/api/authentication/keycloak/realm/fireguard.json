@@ -1,0 +1,62 @@
+{
+    "realm": "fireguard",
+    "enabled": true,
+    "users": [
+        {
+            "username": "admin",
+            "enabled": true,
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": "password"
+                }
+            ],
+            "realmRoles": [
+                "admin"
+            ]
+        }
+    ],
+    "roles": {
+        "realm": [
+            {
+                "name": "user",
+                "description": "User privileges"
+            },
+            {
+                "name": "admin",
+                "description": "Administrator privileges"
+            }
+        ]
+    },
+    "defaultRoles": [
+        "user"
+    ],
+    "clients": [
+        {
+            "clientId": "fireguard_client",
+            "enabled": true,
+            "publicClient": true,
+            "redirectUris": [
+                "*"
+            ],
+            "webOrigins": [
+                "*"
+            ]
+        },
+        {
+            "clientId": "demo-mutual-tls",
+            "enabled": true,
+            "publicClient": false,
+            "clientAuthenticatorType": "client-x509",
+            "redirectUris": [
+                "*"
+            ],
+            "webOrigins": [
+                "*"
+            ],
+            "attributes": {
+                "x509.subjectdn": "CN=demo-mutual-tls-keycloak.*"
+            }
+        }
+    ]
+}

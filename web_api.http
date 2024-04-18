@@ -1,3 +1,12 @@
+### Token
+POST http://127.0.0.1:8090/realms/fireguard/protocool/openid-connect/token
+Content-Type: 'application/x-www-form-urlencoded'
+
+client_id=fireguard_client&
+username=username&
+password=password&
+grant_type=password
+
 ### Stavanger
 POST http://127.0.0.1:8080/fire_risk HTTP/1.1
 Content-Type: 'application/json'

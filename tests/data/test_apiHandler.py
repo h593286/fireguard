@@ -7,9 +7,9 @@ class MyTestCase(unittest.TestCase):
 
     def setUp(self):
         self.apiHandler = APIHandler()
-        self.today = datetime.date.today()
+        self.today = datetime.date(2024, 1, 1)
         self.timeSeries = [datetime.date(2024, 2, 12), datetime.date(2024,2,13)]
-        self.location = Location(longitude=10, latitude=59)
+        self.location = Location(longitude=5.3300, latitude=60.3894)
 
     def test_Observation(self):
 

@@ -9,6 +9,7 @@ services:
     ports:
       - 8080:80
       - 8081:443
+    
   fireguard.database:
     container_name: "fireguard-database"
     image: mongodb/mongodb-community-server:4.4.9-ubuntu2004
@@ -24,5 +25,10 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile.keycloak
+      args:
+        - ADMIN=username
+        - PASSWORD=password
+    volumes:
+      - ./src/api/authentication/keycloak/realm:/opt/keycloak/data/import
     ports:
-      - 8090:8090
+      - "8090:8080"

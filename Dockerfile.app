@@ -24,6 +24,4 @@ COPY src ./src
 COPY ./main.py .
 
 
-
-
 CMD poetry run python main.py

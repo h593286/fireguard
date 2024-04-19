@@ -1,8 +1,8 @@
-FROM python:3.11-alpine
-FROM openjdk:17-jdk-alpine
+FROM quay.io/keycloak/keycloak
+EXPOSE 8080
+ARG ADMIN
+ARG PASSWORD
+ENV KEYCLOAK_ADMIN=${ADMIN}
+ENV KEYCLOAK_ADMIN_PASSWORD=${PASSWORD}
 
-COPY ./src/api/authentication/keycloak-23.0.7 /keycloak-23.0.7
-
-WORKDIR /keycloak-23.0.7
-
-CMD ["./bin/kc.sh", "start-dev", "--http-port", "8090"]
+CMD ["start-dev", "--import-realm"]

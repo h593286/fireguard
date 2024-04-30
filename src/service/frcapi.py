@@ -1,3 +1,6 @@
+# This file has been modified from its original version
+# This file is part of a project licensed under the GNU LGPLv3. See the LICENSE file in the root directory for license terms.
+
 from datetime import timedelta, datetime
 from time import time
 import src.service.TTFmodel.compute as computeTTF
@@ -5,6 +8,8 @@ import src.service.TTFmodel.compute as computeTTF
 
 from src.service.datacollector.dataCollector import DataCollector
 from src.data.dataTypes import Location, FireRiskPrediction, Observations, Forecast, WeatherData
+
+
 
 class FireRiskModelAPI:
 

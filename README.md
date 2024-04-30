@@ -35,17 +35,13 @@ Authorization server
 [http://127.0.0.1:8090](http://127.0.0.1:8090)
 
 ## Get bearer token for protected endpoints:
-for auth token, use postman or:
-(need .env in api/authentication: "# keycloak
-server_url=http://keycloak:8090/
-realm=fireguard
-token=")
+for auth token, use postman or shell:
 
 ```shell
 export token=$(\
 curl -X POST http://localhost:8090/realms/fireguard/protocol/openid-connect/token \
 -d 'client_id=fireguard_client' \
--d 'username=admin&password=admin&grant_type=password'| jq --raw-output '.access_token' \
+-d 'username=admin&password=password&grant_type=password'| jq --raw-output '.access_token' \
 )
 ```
 

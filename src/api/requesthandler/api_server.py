@@ -59,7 +59,7 @@ async def root(request: Request, response: Response):
 
 
 @app.get("/{city}")
-def city(city: str, response: Response):
+def city(city: str, response: Response, user: bool = Depends(verify_user_role)):
 
     city_json = api_server_.read_city(city)
 
@@ -72,16 +72,17 @@ def city_from_coordinates(latitude: float, longitude: float, response: Response,
     city_json = api_server_.read_city_by_coordinates(latitude, longitude)
     return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
 
+@app.get("/fire_risk/city/{city}")
+def fire_risk_city(city: str, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
+
+    firerisk = api_server_.get_firerisk_by_city(city)
+    return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
+
 @app.get("/fire_risk/{latitude}/{longitude}")
 def fire_risk_lat_long(longitude: float, latitude: float, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
 
     firerisk = api_server_.get_firerisk_by_coordinates(latitude, longitude, ts)
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
 
-@app.get("/fire_risk/{city}")
-def fire_risk_city(city: str, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
-
-    firerisk = api_server_.get_firerisk_by_city(city)
-    return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
 
 print("startin api in", getenv("ENVIRONMENT"), "mode", sep=" ")

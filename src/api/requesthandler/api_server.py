@@ -50,16 +50,16 @@ def create_response(body, response: Response, status_code):
 class GetFireRiskRequest(BaseModel):
     location: Location
 
-@app.post("/fire_risk")
+'''@app.post("/fire_risk")
 async def root(request: Request, response: Response):
     json = await request.json()
     body = GetFireRiskRequest(**json)
     city = api_server_.get_firerisk_by_coordinates(body.location.latitude, body.location.longitude)
-    return create_response(city, response, status.HTTP_404_NOT_FOUND)
+    return create_response(city, response, status.HTTP_404_NOT_FOUND)'''
 
 
 @app.get("/{city}")
-def city(city: str, response: Response, user: bool = Depends(verify_user_role)):
+def city(city: str, response: Response):
 
     city_json = api_server_.read_city(city)
 

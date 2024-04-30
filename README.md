@@ -49,9 +49,4 @@ then, use token on one of the protected endpoints (postman or shell):
 ```shell
 curl http://localhost:8080/60.3894/5.3300 -H "Authorization: Bearer "$token
 ```
-using Visual studio's Rest client extension
-```rest
-POST http://localhost:8080/60.3894/5.3300
-Authorization: 'Bearer <your pasted token>'
-```
 

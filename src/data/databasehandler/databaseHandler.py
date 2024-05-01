@@ -55,7 +55,7 @@ class DatabaseHandler:
         """
         raise BaseException("storeObservations is not implemented")
 
-    def getForecast(self,  location : Location) -> Forecast | None:
+    def getForecast(self,  location : Location, time: datetime | None = None) -> Forecast | None:
         # ToDo
         raise BaseException("getForecast is not implemented")
 

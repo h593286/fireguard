@@ -28,7 +28,8 @@ class DataExtractor:
 
             for data in data_list:
 
-                reference_time = dateutil.parser.parse(data['referenceTime'])
+                #reference_time = dateutil.parser.parse(data['referenceTime'])
+                reference_time = dateutil.parser.parse(response['createdAt']) #denne gjenspeiler riktig tidspunkt bedre
                 station_observations = data['observations']
 
                 temperature = np.nan

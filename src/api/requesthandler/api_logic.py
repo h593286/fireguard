@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ConfigDict
-import datetime 
+from datetime import datetime,UTC
 from typing import Optional
 
 from src.service.frcapi import FireRiskModelAPI, FireRiskPrediction, Location
@@ -41,28 +41,39 @@ class FireLogic(BaseModel):
 
         return None # Return None?
     
-    def get_firerisk_by_city(self, city: str)-> FireRiskPrediction:
-        
+    def get_firerisk_by_city(self, city: str, time_from: datetime | None = None, time_to: datetime | None = None)-> FireRiskPrediction:
         city_json = self.read_city(city)
-
-        #TODO: make code robust (add error handling)
 
         if city_json is not None:
             latitude = city_json["lat"]
             longitude = city_json["lng"]
         
         location = Location(latitude=latitude, longitude=longitude)
-        prediction = self.modelApi.compute(location)
+
+        if time_to is None:
+            prediction = self.modelApi.compute(location)
+
+        elif time_from is None and isinstance(time_to, datetime):
+            time_to_delta = time_to-datetime.now(UTC)
+            prediction = self.modelApi.compute_now_period(location, time_to_delta)
+
+        #TODO: could return same as modelApi.compute(location), but limited by time_from. 
+        elif isinstance(time_from, datetime) and time_to is None: 
+            raise ValueError("time_to must be specified")
+            #prediction = self.modelApi.compute_period_now(location, time_from)
+
+        '''elif isinstance(time_from, datetime.datetime) and isinstance(time_to, datetime.datetime):
+            prediction = self.modelApi.compute_period(location, time_from, time_to)'''
         return prediction
 
 
-    def get_firerisk_by_coordinates(self, latitude: float, longitude: float, ts: Optional[datetime.datetime] = None) -> FireRiskPrediction:
+    def get_firerisk_by_coordinates(self, latitude: float, longitude: float, ts: Optional[datetime] = None) -> FireRiskPrediction:
 
-        #TODO: add code for handling ts
+        #TODO: use code in get_firerisk_by_city to add ts functionality
 
         location = Location(latitude=latitude, longitude=longitude)
         prediction = self.modelApi.compute(location)
-        #print(prediction)
+
         return prediction
     
 '''    

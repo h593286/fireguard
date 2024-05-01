@@ -59,7 +59,7 @@ def preprocess(wd: WeatherData):
     temp_interpolated = np.interp(interpolation_timevector_sec, time_temp_clean, temp_clean)
     humidity_interpolated = np.interp(interpolation_timevector_sec, time_humidity_clean, humidity_clean)
     wind_interpolated = np.interp(interpolation_timevector_sec, time_wind_clean, wind_clean)
-
+    print(start_time,'dette er start-tiden')
     return start_time, interpolation_timevector_sec, temp_interpolated, humidity_interpolated, wind_interpolated, max_time_delta
 
 

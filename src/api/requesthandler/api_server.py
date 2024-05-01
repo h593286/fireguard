@@ -73,9 +73,9 @@ def city_from_coordinates(latitude: float, longitude: float, response: Response,
     return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("/fire_risk/city/{city}")
-def fire_risk_city(city: str, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
+def fire_risk_city(city: str, response: Response, ts_from: Optional[datetime] = None, ts_to: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
 
-    firerisk = api_server_.get_firerisk_by_city(city)
+    firerisk = api_server_.get_firerisk_by_city(city, ts_from, ts_to)
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("/fire_risk/{latitude}/{longitude}")
@@ -83,6 +83,8 @@ def fire_risk_lat_long(longitude: float, latitude: float, response: Response, ts
 
     firerisk = api_server_.get_firerisk_by_coordinates(latitude, longitude, ts)
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
+
+
 
 
 print("startin api in", getenv("ENVIRONMENT"), "mode", sep=" ")

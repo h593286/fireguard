@@ -28,6 +28,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 # ==============================================================================
 # Fireguard API server endpoints
 # ==============================================================================
@@ -58,14 +59,14 @@ async def root(request: Request, response: Response):
     return create_response(city, response, status.HTTP_404_NOT_FOUND)'''
 
 
-@app.get("/{city}")
+@app.get("cities/{city}")
 def city(city: str, response: Response):
 
     city_json = api_server_.read_city(city)
 
     return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
 
-@app.get("/{latitude}/{longitude}")
+@app.get("cities/{latitude}/{longitude}")
 def city_from_coordinates(latitude: float, longitude: float, response: Response, user: bool = Depends(verify_user_role)):
 #def city_from_coordinates(latitude: float, longitude: float, response: Response):
 
@@ -79,8 +80,7 @@ def fire_risk_city(city: str, response: Response, ts: Optional[datetime] = None,
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("/fire_risk/{latitude}/{longitude}")
-def fire_risk_lat_long(longitude: float, latitude: float, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
-
+def fire_risk_lat_long(latitude: float, longitude: float, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
     firerisk = api_server_.get_firerisk_by_coordinates(latitude, longitude, ts)
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
 

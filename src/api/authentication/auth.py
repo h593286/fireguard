@@ -1,4 +1,4 @@
-from fastapi import Request, Depends, HTTPException, status
+from fastapi import Request, Depends, HTTPException, status, Response
 from keycloak import KeycloakOpenID
 from decouple import config
 from dotenv import load_dotenv
@@ -15,11 +15,13 @@ keycloak_openid = KeycloakOpenID(
 )
 
 def get_jwt_token(req: Request):
-    token = req.headers["Authorization"]
-    print(token)
-    token = token.split(" ").pop(1)
-    print(token)
-    return token
+    token = req.headers.get("Authorization")
+    if token is None:
+        return None
+    
+    scheme, token = token.split(" ")
+    print(scheme, token)
+    return scheme, token
 
 async def get_idp_public_key():
     return (
@@ -29,10 +31,15 @@ async def get_idp_public_key():
     )
 
 async def get_payload(token=Depends(get_jwt_token)):
-    
+    if token is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="missing token",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     try:
         return keycloak_openid.decode_token(
-            token,
+            token[1],
             key=await get_idp_public_key(),
             options={
                 "verify_signature":True,

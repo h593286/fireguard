@@ -1,5 +1,4 @@
 name: fireguard
-
 services:
   web-api:
     container_name: web-api
@@ -23,6 +22,8 @@ services:
     restart: always
     ports:
       - 27017:27017
+    volumes:
+      - mongodb_database:/data/db:rw
 
   keycloak:
     container_name: keycloak
@@ -39,4 +40,4 @@ services:
 
 volumes:
   keycloak_data:
-
+  mongodb_database:

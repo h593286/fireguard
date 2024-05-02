@@ -47,6 +47,7 @@ curl -X POST http://localhost:8090/realms/fireguard/protocol/openid-connect/toke
 
 then, use token on one of the protected endpoints (postman or shell):
 ```shell
-curl http://localhost:8080/60.3894/5.3300 -H "Authorization: Bearer "$token
+curl http://localhost:8080/fire_risk/city/Bergen?ts_from=2024-04-30T21:59:59Z&ts_to=2024-05-09T18:59:59Z -H "Authorization: Bearer "$token
 ```
+
 

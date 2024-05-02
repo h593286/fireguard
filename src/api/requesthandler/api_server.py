@@ -68,7 +68,6 @@ def city(city: str, response: Response):
 
 @app.get("cities/{latitude}/{longitude}")
 def city_from_coordinates(latitude: float, longitude: float, response: Response, user: bool = Depends(verify_user_role)):
-#def city_from_coordinates(latitude: float, longitude: float, response: Response):
 
     city_json = api_server_.read_city_by_coordinates(latitude, longitude)
     return create_response(city_json, response, status.HTTP_404_NOT_FOUND)

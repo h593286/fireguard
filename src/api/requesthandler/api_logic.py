@@ -50,20 +50,33 @@ class FireLogic(BaseModel):
         
         location = Location(latitude=latitude, longitude=longitude)
 
-        if time_to is None:
+        if time_to is None and time_from is None:
             prediction = self.modelApi.compute(location)
 
         elif time_from is None and isinstance(time_to, datetime):
-            time_to_delta = time_to-datetime.now(UTC)
-            prediction = self.modelApi.compute_now_period(location, time_to_delta)
+            if datetime.now(UTC) > time_to:
+                #TODO: fetch firerisk directly from DB if implemented
+                raise ValueError("time_to must be larger than datetime.now()")
+            else:
+                time_to_delta = time_to-datetime.now(UTC)
+                prediction = self.modelApi.compute_now_period(location, time_to_delta)
 
         #TODO: could return same as modelApi.compute(location), but limited by time_from. 
         elif isinstance(time_from, datetime) and time_to is None: 
             raise ValueError("time_to must be specified")
             #prediction = self.modelApi.compute_period_now(location, time_from)
+        
+        elif isinstance(time_from, datetime) and isinstance(time_to, datetime):
+            if time_from > time_to:
+                raise ValueError('"from date" must be before "to date"')
+            elif datetime.now(UTC) > time_to: #TODO: fetch firerisk directly from DB if implemented
+                raise ValueError("time_to must be larger than datetime.now()")
+            else:
+                prediction = self.modelApi.compute_period(location, time_from, time_to)
 
-        '''elif isinstance(time_from, datetime.datetime) and isinstance(time_to, datetime.datetime):
-            prediction = self.modelApi.compute_period(location, time_from, time_to)'''
+        else:
+            raise TypeError("time_from and time_to are wrong types")
+
         return prediction
 
 

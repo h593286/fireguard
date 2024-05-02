@@ -29,9 +29,9 @@ class FireRiskModelAPI:
 
         if isinstance(forecast, Forecast):
             fct = forecast
-        print(len(observations.data))
-    
-        print(len(forecast.data))
+                
+        print('OBSERVATION',observations)
+        print('FORECAST', forecast)
         obs_fetch = time()
         print("data fetching time: ", obs_fetch - start)
         wd = WeatherData(created=datetime.now(), observations=obs, forecast=fct)
@@ -78,33 +78,19 @@ class FireRiskModelAPI:
     
 # compute firerisk from a timestamp to another timestamp
     def compute_period(self, location: Location, start: datetime, end: datetime) -> FireRiskPrediction:
-        time_now = datetime.now(UTC)
-        start_time = time_now #- obs_delta
 
-        observations=self.client.collectObservation(location, start_time) 
-        forecast=self.client.collectForecast(location)
+        #TODO: add logic for handling start being after datetime.now() and end being before datetime.now()
+        #TODO: add error handling for start being after end
 
-        if isinstance(observations, Observations):
-            obs = observations
+        observations=self.client.collectObservation(location, start) 
+        forecast=self.client.collectForecast(location, end)
 
-        if isinstance(forecast, Forecast):
-            fct = forecast
-
-        forecast.data = forecast.data[:3] #TODO: automate this when ts is added for forecast
-        print(len(observations.data))
-        print(observations)
-
-        print(len(forecast.data))
-        print(forecast) #TODO: be able to handle lengt/amount of forecast data
-
-       
-
-        wd = WeatherData(created=time_now, observations=observations, forecast=forecast)
+        wd = WeatherData(created=datetime.now(UTC), observations=observations, forecast=forecast)
 
         print(wd.to_json())
 
         prediction = computeTTF.compute(wd)
-        print(prediction)
+
         return prediction
 
 # compute firerisk from now to a timestamp
@@ -112,22 +98,12 @@ class FireRiskModelAPI:
         time_now = datetime.now(UTC)
         time_to = time_now + fct_delta
 
-        print('TIME TO' ,   time_to)
-
         observations=self.client.collectObservation(location, None)
         forecast=self.client.collectForecast(location, time_to)
 
-        if isinstance(observations, Observations):
-            obs = observations
-
-        if isinstance(forecast, Forecast):
-            fct = forecast
-
-        #forecast.data = forecast.data[:10] #TODO: automate this when ts is added for forecast
-        print(len(observations.data))
         print(observations)
 
-        print(len(forecast.data))
+        #print(len(forecast.data))
         print(forecast) #TODO: be able to handle lengt/amount of forecast data
 
         wd = WeatherData(created=time_now, observations=observations, forecast=forecast)

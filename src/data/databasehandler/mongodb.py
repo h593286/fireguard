@@ -57,7 +57,7 @@ class MongoDbHandler(DatabaseHandler):
     @overrides(DatabaseHandler)
     def storeObservations(self, location: Location, observations: list[WeatherDataPoint]):
         data = list(map(_to_mongodb_entry, observations))
-        print('DATA SOM BLIR LAGRET',data)
+
         database = self.client.get_database("observations")
         observation_list = database.get_collection(str(location))
         return observation_list.insert_many(data).acknowledged
@@ -68,6 +68,7 @@ class MongoDbHandler(DatabaseHandler):
         if to_date is None:
             to_date = from_date + timedelta(days=14)
         forecasts = self._query_date_range("forecasts", location, from_date, to_date)
+
         points = list(map(_to_weather_data_point, forecasts))
         if len(points) == 0:
             return None

@@ -11,7 +11,7 @@ from src.data.apihandler.METClient import METClient
 # Same format for storage
 class DataExtractor:
 
-    def extractObservation(self, response, location : Location):
+    def extractObservation(self, response, location : Location, reference_time: datetime.datetime | None = None):
         # Take out the necessary elements from the observation and return it
 
         response = response.json()
@@ -29,7 +29,7 @@ class DataExtractor:
             for data in data_list:
 
                 #reference_time = dateutil.parser.parse(data['referenceTime'])
-                reference_time = dateutil.parser.parse(response['createdAt']) #denne gjenspeiler riktig tidspunkt bedre
+                
                 station_observations = data['observations']
 
                 temperature = np.nan

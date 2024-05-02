@@ -32,7 +32,6 @@ class APIHandler:
         else:
             raise ValueError(
                 "Invalid time argument. Must be 'latest', a datetime object, or an iterable of two datetime objects.")
-
         return self.frostClient.sendObservationRequest(location, formatted_time)
 
     def getForecast(self, location: Location):

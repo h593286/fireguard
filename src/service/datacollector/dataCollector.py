@@ -30,11 +30,13 @@ class DataCollector:
 
         else:
             observation = self.apiHandler.getObservation(location,time)
-            observation = self.dataExtractor.extractObservation(observation, location)
-            print('SLIK SER OBSERVATION UT:', observation.data)
+            
+            observation = self.dataExtractor.extractObservation(observation, location, time)
             self.databaseHandler.storeObservations(location, observation.data) #Stores the 'unseen' observation for potential later use
-            observation = self.databaseHandler.getObservation(location,time) # Henter observationen fra databasen til riktig tidspunkt
 
+            #grunnen til at denne linja er lagt til: når databasen er tom, vil den hindre at det hentes observation på timestamp som er > 'time'-variabelen
+            #om time = None vil den hente samme dataen, men fra databasen     
+            observation = self.databaseHandler.getObservation(location,time) # Henter observationen fra databasen til riktig tidspunkt
         return observation
 
     def collectForecast(self, location : Location, time: datetime | None = None):
@@ -46,6 +48,9 @@ class DataCollector:
             forecast = self.apiHandler.getForecast(location)
             forecast = self.dataExtractor.extractForecast(forecast) 
             self.databaseHandler.storeForecast(forecast)
+
+            #grunnen til at denne linja er lagt til: når databasen er tom, vil den hindre at det hentes forecast på timestamp som er > 'time'-variabelen
+            #om time = None vil den hente samme dataen, men fra databasen    
             forecast = self.databaseHandler.getForecast(location, time) # Henter forecasten fra databasen til riktig tidspunkt
 
         return forecast

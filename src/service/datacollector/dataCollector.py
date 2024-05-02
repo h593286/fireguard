@@ -46,6 +46,6 @@ class DataCollector:
             forecast = self.apiHandler.getForecast(location)
             forecast = self.dataExtractor.extractForecast(forecast) 
             self.databaseHandler.storeForecast(forecast)
-            #forecast = self.databaseHandler.getForecast(location, time) # Henter forecasten fra databasen til riktig tidspunkt
+            forecast = self.databaseHandler.getForecast(location, time) # Henter forecasten fra databasen til riktig tidspunkt
 
         return forecast

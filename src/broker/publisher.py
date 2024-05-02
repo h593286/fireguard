@@ -7,8 +7,8 @@ load_dotenv()
 
 class Publisher:
     def __init__(self):
-        self.brokerURL = os.getenv('BROKER_URL')
-        self.port = int(os.getenv('BROKER_PORT'))
+        self.brokerURL = os.getenv('BROKER_URL', '')
+        self.port = int(os.getenv('BROKER_PORT', 0))
         self.client = mqtt.Client()
         self.client.username_pw_set(os.getenv('PUBLISHER_USERNAME'), os.getenv('PUBLISHER_PASSWORD'))
         self.client.tls_set()  # Set up TLS
@@ -26,7 +26,4 @@ class Publisher:
     # TTF = ttf value
     # Usage example: publisher.publish('Bergen', '1234')
     def publish(self, city, TTF):
-        self.connect()  # Connect to broker
         self.client.publish(city, TTF)  # Publish message
-        time.sleep(1)  # Wait for 1 second (adjust as needed)
-        self.disconnect()  # Disconnect from broker

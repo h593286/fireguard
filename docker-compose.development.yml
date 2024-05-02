@@ -5,3 +5,10 @@ services:
         - ENVIRONMENT=Development
     volumes:
       - ./src:/app/src
+  publisher:
+    build:
+      args:
+        - ENVIRONMENT=Development
+    volumes:
+      - ./src:/app/src
+  

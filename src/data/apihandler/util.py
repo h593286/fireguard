@@ -5,6 +5,8 @@ import datetime
 def format_date(dt: datetime.datetime | datetime.date):
     return dt.strftime('%Y-%m-%d')
 
+def format_datetime(dt: datetime.datetime):
+    return dt.strftime('%Y-%m-%dT%h:%M:%s%Z')
 
 def format_period(start: datetime.datetime, end: datetime.datetime):
     start_date = format_date(start)

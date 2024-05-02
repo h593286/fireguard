@@ -44,6 +44,12 @@ class FireLogic(BaseModel):
     def get_firerisk_by_city(self, city: str, time_from: datetime | None = None, time_to: datetime | None = None)-> FireRiskPrediction:
         city_json = self.read_city(city)
 
+        if time_from is not None:
+            time_from = time_from.astimezone(UTC)
+        
+        if time_to is not None:
+            time_to = time_to.astimezone(UTC)
+
         if city_json is not None:
             latitude = city_json["lat"]
             longitude = city_json["lng"]

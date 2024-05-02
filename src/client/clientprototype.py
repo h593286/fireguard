@@ -9,3 +9,6 @@ app = Flask(__name__)
 def files(path: str):
     print(path)
     return send_from_directory("../../static",path)
+
+
+app.run()

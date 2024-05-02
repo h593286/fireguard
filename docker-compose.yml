@@ -1,5 +1,18 @@
 name: fireguard
 services:
+  publisher:
+    container_name: publisher
+    build:
+      context: .
+      dockerfile: Dockerfile.publisher
+    environment:
+      - CLIENT_ID=${CLIENT_ID}
+      - USER_ID=${USER_ID}
+      - USER_PASSWORD=${USER_PASSWORD}
+      - BROKER_URL=${BROKER_URL}             
+      - BROKER_PORT=${BROKER_PORT}            
+      - PUBLISHER_USERNAME=${PUBLISHER_USERNAME}     
+      - PUBLISHER_PASSWORD=${PUBLISHER_PASSWORD}     
   web-api:
     container_name: web-api
     build:

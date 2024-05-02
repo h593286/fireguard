@@ -40,11 +40,12 @@ app.add_middleware(
 # # app.mount("/welcome", StaticFiles(directory="static"), name="static") #static files for later
 
 def create_response(body, response: Response, status_code):
-
+    
     if body:
         return body
-    
+
     response.status_code = status_code
+
 
     return None
 

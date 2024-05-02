@@ -21,18 +21,13 @@ If you are unsure on how to do this, follow this [link](https://docs.github.com/
 
 
 ## 2. Add the .env files to the project
-the first `.env` file should be placed in the folder `src/data/apihandler/`, and contain the following values
-```env
+add a `.env` file in the root folder of the repository and add the following values
+```cs
 FROST_CLIENT_ID=<your client id>
 FROST_CLIENT_SECRET=<your client secret>
 
 MONGO_DB_CONNECTION_STRING=mongodb://username:password@fireguard-database:27017/admin?retryWrites=true&loadBalanced=false&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1
-```
 
-The second should be placed in the folder 
-`src/broker/`
-and contain the following values 
-```env
 BROKER_URL = the broker url
 BROKER_PORT= the broker port
 PUBLISHER_USERNAME = your publisher's username

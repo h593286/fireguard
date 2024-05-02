@@ -20,7 +20,7 @@ def get_jwt_token(req: Request):
         return None
     
     scheme, token = token.split(" ")
-    print(scheme, token)
+    #print(scheme, token)
     return scheme, token
 
 async def get_idp_public_key():
@@ -55,7 +55,7 @@ async def get_payload(token=Depends(get_jwt_token)):
         )
     
 async def get_user_info(payload:dict=Depends(get_payload)) -> User:
-    print(payload)
+    #print(payload)
     client_id = payload.get("azp")
     try:
         return User(
@@ -76,13 +76,13 @@ async def get_user_info(payload:dict=Depends(get_payload)) -> User:
 def verify_user_role(user: User = Depends(get_user_info)) -> bool:
     roles: list = user.realm_roles
     roles.extend(user.client_roles)
-    print(roles)
+    #print(roles)
     return verify_role(roles, "USER")
 
 def verify_admin_role(user: User = Depends(get_user_info)) -> bool:
     roles: list = user.realm_roles
     roles.extend(user.client_roles)
-    print(roles)
+    #print(roles)
     return verify_role(roles, "ADMIN")
 
 def verify_role(roles:list,role:str)->bool:

@@ -8,19 +8,35 @@
 # Instructions 
 
 To replicate the project and to run it on your own device, please follow the instructions below.
+### Pre-req:
+- HiveMQ: https://console.hivemq.cloud/ (Create subscriber and publisher)
+- Poetry
+- Docker
+- MongoDB
 
 ## 1. Clone GitHub project
 Clone the GitHub project.
 
 If you are unsure on how to do this, follow this [link](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository).
 
-## 2. Add the .env file to the project
-the `.env` file should be placed in the folder `src/data/apihandler/`, and contain the following values
+
+## 2. Add the .env files to the project
+the first `.env` file should be placed in the folder `src/data/apihandler/`, and contain the following values
 ```env
 FROST_CLIENT_ID=<your client id>
 FROST_CLIENT_SECRET=<your client secret>
 
 MONGO_DB_CONNECTION_STRING=mongodb://username:password@fireguard-database:27017/admin?retryWrites=true&loadBalanced=false&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1
+```
+
+The second should be placed in the folder 
+`src/broker/`
+and contain the following values 
+```env
+BROKER_URL = the broker url
+BROKER_PORT= the broker port
+PUBLISHER_USERNAME = your publisher's username
+PUBLISHER_PASSWORD = your publisher's password
 ```
 
 ## 3. Spin up development application

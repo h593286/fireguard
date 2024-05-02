@@ -7,7 +7,7 @@ load_dotenv()
 class Publisher:
     def __init__(self):
         self.brokerURL = os.getenv('BROKER_URL')
-        self.port = os.getenv('BROKER_PORT')
+        self.port = int(os.getenv('BROKER_PORT'))
         self.client = mqtt.Client()
         self.client.username_pw_set(os.getenv('PUBLISHER_USERNAME'),os.getenv('PUBLISHER_PASSWORD'))
         self.client.tls_set()  # Set up TLS

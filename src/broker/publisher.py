@@ -6,11 +6,12 @@ port = 8883
 
 client = mqtt.Client()
 client.tls_set()  # Set up TLS
-client.connect("brokerURL", port, 60)
 
-# Publish a message
-client.publish("test/topic", "Hello from Python over WebSockets!")
+##publish
+def connect():
+    client.connect("brokerURL", port, 60)
+def disconnect():
+    client.disconnect()
 
-# Disconnect from the broker
-client.disconnect()
-
+def publish(city, TTF):
+    client.publish("test/topic", city + ", TTF: " + TTF)

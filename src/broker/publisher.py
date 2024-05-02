@@ -6,8 +6,8 @@ load_dotenv()
 
 class Publisher:
     def __init__(self):
-        self.brokerURL = 'c406645d204a4c93919e442f4c8bcc09.s1.eu.hivemq.cloud'
-        self.port = 8883
+        self.brokerURL = os.getenv('BROKER_URL')
+        self.port = os.getenv('BROKER_PORT')
         self.client = mqtt.Client()
         self.client.username_pw_set(os.getenv('PUBLISHER_USERNAME'),os.getenv('PUBLISHER_PASSWORD'))
         self.client.tls_set()  # Set up TLS
@@ -19,8 +19,12 @@ class Publisher:
         self.client.disconnect()
 
     def publish(self,city, TTF):
-        self.client.publish("test/topic", city + ", TTF: " + TTF)
 
+        #For testing
+        self.client.publish("test/topic", city + ", TTF: " + TTF)
         #Correct when implementation tested works
         #self.client.publish("city/"+city, TTF)
+
+
+
 

@@ -572,9 +572,11 @@
 
         client.on('connect', function () {
             console.log('Connected');
-            client.subscribe('test/topic', function (err) {
+            client.subscribe('city/Bergen', function (err) {
                 if (!err) {
-                    console.log("Subscribed to test/topic");
+                    console.log("Subscribed to city/Bergen");
+                } else {
+                    console.error('Subscription error:', err);
                 }
             });
         });

@@ -15,7 +15,7 @@ ARG ENVIRONMENT=Development
 ENV ENVIRONMENT=${ENVIRONMENT}
 
 RUN if [ "$ENVIRONMENT" = "Development" ]; \
-        then poetry install; \
+        then poetry install --with dev; \
     else \
         poetry install --without dev; \
     fi

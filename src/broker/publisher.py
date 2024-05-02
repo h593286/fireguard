@@ -22,8 +22,11 @@ class Publisher:
         self.client.disconnect()
 
     # Publish a message
+    # Topic = city name, i.e city = bergen
+    # TTF = ttf value
+    # Usage example: publisher.publish('Bergen', '1234')
     def publish(self, city, TTF):
         self.connect()  # Connect to broker
-        self.client.publish("city/"+city, TTF)  # Publish message
+        self.client.publish(city, TTF)  # Publish message
         time.sleep(1)  # Wait for 1 second (adjust as needed)
         self.disconnect()  # Disconnect from broker

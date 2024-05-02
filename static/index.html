@@ -560,7 +560,6 @@
 
 
     <!-- This subscriber sections -->
-    <!-- OBS! OBS! Remember to replace the topic with city/Bergen, after complete implementation-->
     <input type="text" id="messageBox" readonly>
 
     <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
@@ -572,9 +571,9 @@
 
         client.on('connect', function () {
             console.log('Connected');
-            client.subscribe('city/Bergen', function (err) {
+            client.subscribe('Bergen', function (err) {
                 if (!err) {
-                    console.log("Subscribed to city/Bergen");
+                    console.log("Subscribed to Bergen");
                 } else {
                     console.error('Subscription error:', err);
                 }

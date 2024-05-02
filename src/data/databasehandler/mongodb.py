@@ -11,6 +11,7 @@ class MongoDbHandler(DatabaseHandler):
     def __init__(self):
         super().__init__()
         connection_string = os.getenv("MONGO_DB_CONNECTION_STRING")
+        print(connection_string)
         self.client = MongoClient(connection_string)
         print("connected to mongo db")
 

@@ -34,7 +34,8 @@ services:
         - ADMIN=username
         - PASSWORD=password
     volumes:
-      - keycloak_data:/opt/keycloak/data
+      #- keycloak_data:/opt/keycloak/data
+      - ./src/api/authentication/keycloak/keycloak_info.json:/opt/keycloak/data/import/keycloak_info.json
     ports:
       - "8090:8080"
 

@@ -5,4 +5,7 @@ ARG PASSWORD
 ENV KEYCLOAK_ADMIN=${ADMIN}
 ENV KEYCLOAK_ADMIN_PASSWORD=${PASSWORD}
 
+COPY src/api/authentication/keycloak/keycloak_info.json /opt/keycloak/data/import/keycloak_info.json
+
 CMD ["start-dev", "--import-realm"]
+ 

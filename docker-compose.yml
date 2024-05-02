@@ -8,10 +8,9 @@ services:
     environment:
       - KEYCLOAK_SERVER_URL=http://keycloak:8080
       - KEYCLOAK_REALM_NAME=fireguard
-      - MONGO_INITDB_ROOT_USERNAME=username
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      # kan legge til her tror jeg
-      #- MONGO_DB_CONNECTION_STRING=mongodb://username:password@fireguard-database:27017/admin?retryWrites=true&loadBalanced=false&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-1
+      - MONGO_DB_CONNECTION_STRING=${MONGO_DB_CONNECTION_STRING}
+      - FROST_CLIENT_ID=${FROST_CLIENT_ID}
+      - FROST_CLIENT_SECRET=${FROST_CLIENT_SECRET}
     ports:
       - 8080:80
       - 8081:443
@@ -20,6 +19,9 @@ services:
     container_name: "fireguard-database"
     image: mongodb/mongodb-community-server:4.4.9-ubuntu2004
     restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
     ports:
       - 27017:27017
     volumes:
@@ -31,11 +33,11 @@ services:
       context: .
       dockerfile: Dockerfile.keycloak
       args:
-        - ADMIN=username
-        - PASSWORD=password
-    volumes:
+        - ADMIN=${KEYCLOAK_ADMIN}
+        - PASSWORD=${KEYCLOAK_PASSWORD}
+    #volumes:
       #- keycloak_data:/opt/keycloak/data
-      - ./src/api/authentication/keycloak/keycloak_info.json:/opt/keycloak/data/import/keycloak_info.json
+      #- ./src/api/authentication/keycloak/keycloak_info.json:/opt/keycloak/data/import/keycloak_info.json
     ports:
       - "8090:8080"
 

@@ -1,19 +1,22 @@
-### Token
+# @name GetToken
 POST http://localhost:8090/realms/fireguard/protocol/openid-connect/token
-Content-Type: 'application/x-www-form-urlencoded'
+Content-Type: application/x-www-form-urlencoded
  
 client_id=fireguard_client
 &username=admin
 &password=password
 &grant_type=password
 
-### Stavanger
-GET http://127.0.0.1:8080/fire_risk/5.7314/58.9700 HTTP/1.1
+###
+@access_token = {{GetToken.response.body.access_token}}
 
+### Stavanger
+GET http://localhost:8080/fire_risk/city/Bergen?ts_from=2024-04-30T21:59:59Z&ts_to=2024-05-09T18:59:59Z 
+Authorization: Bearer {{access_token}}
 
 ### Bergen
 POST http://127.0.0.1:8080/fire_risk HTTP/1.1
-Content-Type: 'application/json'
+Content-Type: application/json
 
 {
     "location": {

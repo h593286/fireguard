@@ -1,5 +1,5 @@
 import numpy as np
-from src.data.dataTypes import *
+from src.data.dataTypes import WeatherData
 from src.service.TTFmodel.parameters import delta_t
 
 def combine_obs_fct(sorted_data_obs, sorted_data_fct, parameter):

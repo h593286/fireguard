@@ -10,8 +10,8 @@ client_id=fireguard_client
 ###
 @access_token = {{GetToken.response.body.access_token}}
 
-### Stavanger
-GET http://localhost:8080/fire_risk/city/Bergen?ts_from=2024-04-30T21:59:59Z&ts_to=2024-05-09T18:59:59Z 
+### Bergen
+GET http://localhost:8080/fire_risk/city/Bergen?ts_from=2024-05-20T21:59:59Z&ts_to=2024-05-22T18:59:59Z 
 Authorization: Bearer {{access_token}}
 
 ### Bergen

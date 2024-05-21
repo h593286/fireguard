@@ -103,7 +103,7 @@ class FireLogic(BaseModel):
         prediction = self.modelApi.compute_now(location, obs_delta)
 
         return prediction
-        '''
+'''
     
 
 

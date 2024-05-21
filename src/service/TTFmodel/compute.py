@@ -1,10 +1,10 @@
 import datetime
-from pydantic import BaseModel
 import numpy as np
+import numpy.typing as nt
 import src.service.TTFmodel.parameters as pm
 import src.service.TTFmodel.utils as util
-from src.data.dataTypes import *
-from src.service.TTFmodel.preprocess import *
+from src.data.dataTypes import WeatherData, FireRiskPrediction, FireRisk
+from src.service.TTFmodel.preprocess import preprocess
 
 
 def compute(wd: WeatherData) -> FireRiskPrediction:
@@ -35,7 +35,7 @@ def compute(wd: WeatherData) -> FireRiskPrediction:
     return FireRiskResponse
 
 
-def compute_firerisk(temp_outside: list[float], relative_humidity_outside: list[float]):
+def compute_firerisk(temp_outside: list[float] | nt.NDArray[np.float64], relative_humidity_outside: list[float] | nt.NDArray[np.float64]):
     """Computes the firerisks for the provided temperatures and humidities.
     
     Parameters
@@ -114,7 +114,7 @@ def compute_firerisk(temp_outside: list[float], relative_humidity_outside: list[
         # compute fmc in layer 1
         wall_vector[0] = util.calc_layer1(relative_humidity_inside[i], relative_humidity_wall[i], wall[i][0], wall[i][1], consentration_water_saturation_inside[i])
         n = 0
-        for l in range(pm.sub_layers-2):
+        for _l in range(pm.sub_layers-2):
             # compute fmc in wall layers 2 to N-1
             n = n + 1
             wall_vector[n] = util.calc_middle_layers(wall[i][n], wall[i][n - 1], wall[i][n + 1])

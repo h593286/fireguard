@@ -19,7 +19,7 @@ def Build_Fireguard():
 
     #cities = [item['city'] for item in json_data]
     frc_model_api = FireRiskModelAPI(service_data) # maybe remove this line and strictly use the DataCollector class
-    api_server_ = FireLogic(name = "Fireguard", cities=json_data, modelApi=frc_model_api)
+    api_server = FireLogic(name = "Fireguard", cities=json_data, modelApi=frc_model_api)
     
 
-    return api_server_
+    return api_server

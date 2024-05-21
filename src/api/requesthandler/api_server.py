@@ -1,11 +1,11 @@
 from os import getenv
-from fastapi import FastAPI, Request, Response, status, Depends
+from fastapi import FastAPI, Response, status, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 
-from src.api.authentication.auth import verify_user_role, verify_admin_role
+from src.api.authentication.auth import verify_user_role
 from src.api.requesthandler.buildFireguardAPI import Build_Fireguard
 from src.data.dataTypes import Location
 

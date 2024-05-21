@@ -9,10 +9,14 @@ services:
       - CLIENT_ID=${CLIENT_ID}
       - USER_ID=${USER_ID}
       - USER_PASSWORD=${USER_PASSWORD}
+      - KEYCLOAK_SERVER_URL=http://keycloak:8080
+      - KEYCLOAK_REALM_NAME=fireguard
+      - FIREGUARD_API_URL=http://web-api:80
       - BROKER_URL=${BROKER_URL}             
       - BROKER_PORT=${BROKER_PORT}            
       - PUBLISHER_USERNAME=${PUBLISHER_USERNAME}     
       - PUBLISHER_PASSWORD=${PUBLISHER_PASSWORD}     
+      - FIREGUARD_API_URL=${FIREGUARD_API_URL}
   web-api:
     container_name: web-api
     build:

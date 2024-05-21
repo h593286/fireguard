@@ -1,17 +1,15 @@
-from src.data.apihandler.apihandler import APIHandler
-from src.data.dataTypes import *
+from src.data.dataTypes import Location, WeatherDataPoint, Observations, Forecast
 import numpy as np
 import dateutil.parser
 
+from datetime import datetime
 
-#Check if correct import
-from src.data.apihandler.METClient import METClient
 
 # Extracts the wanted data from the observation- and forecast-responses.
 # Same format for storage
 class DataExtractor:
 
-    def extractObservation(self, response, location : Location, reference_time: datetime.datetime | None = None):
+    def extractObservation(self, response, location : Location, reference_time: datetime | None = None):
         # Take out the necessary elements from the observation and return it
 
         response = response.json()
@@ -20,7 +18,7 @@ class DataExtractor:
 
         weatherdatapoints = list()
 
-        source_id = None
+        source_id: str = None # type: ignore
 
         if len(data_list) >= 1:
 
@@ -52,7 +50,7 @@ class DataExtractor:
                 wd_point = WeatherDataPoint(temperature=temperature,
                                             humidity=relative_humidity,
                                             wind_speed=wind_speed,
-                                            timestamp=timestamp
+                                            timestamp=timestamp # type: ignore
                                             )
 
                 weatherdatapoints.append(wd_point)
@@ -74,7 +72,7 @@ class DataExtractor:
 
         timeseries = response['properties']['timeseries']
 
-        weatherdatapoints = list()
+        weatherdatapoints: list[WeatherDataPoint] = []
 
         for forecast in timeseries:
 

@@ -1,7 +1,8 @@
+import os
 import requests
 from dotenv import load_dotenv
+
 from src.data.dataTypes import Location
-import os
 
 load_dotenv()
 

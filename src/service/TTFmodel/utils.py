@@ -1,7 +1,6 @@
 # Copied from https://github.com/h584969/dynamic-frcm/blob/main/src/frcm/fireriskmodel/utils.py
 
 import math
-import numpy as np
 import src.service.TTFmodel.parameters as mp
 
 """Functions for computing saturation vapor pressure, and water concentrations"""

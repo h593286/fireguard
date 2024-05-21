@@ -1,6 +1,5 @@
-from fastapi import Request, Depends, HTTPException, status, Response
+from fastapi import Request, Depends, HTTPException, status
 from keycloak import KeycloakOpenID
-from decouple import config
 from dotenv import load_dotenv
 import os
 
@@ -18,9 +17,9 @@ def get_jwt_token(req: Request):
     token = req.headers.get("Authorization")
     if token is None:
         return None
-    
+
     scheme, token = token.split(" ")
-    #print(scheme, token)
+
     return scheme, token
 
 async def get_idp_public_key():

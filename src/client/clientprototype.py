@@ -1,7 +1,4 @@
-import json
-import requests
-from flask import Flask, request, send_from_directory
-from flask import Flask, request
+from flask import Flask, send_from_directory
 
 app = Flask(__name__)
 
@@ -9,6 +6,5 @@ app = Flask(__name__)
 def files(path: str):
     print(path)
     return send_from_directory("../../static",path)
-
 
 app.run()

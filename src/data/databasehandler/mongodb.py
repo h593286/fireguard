@@ -1,10 +1,10 @@
-from datetime import datetime, UTC, timedelta
 import os
 from typing import Any, Collection
-from src.data.dataTypes import Forecast, Location, Observations, WeatherDataPoint
-from src.data.databasehandler.databaseHandler import DatabaseHandler
+from datetime import datetime, UTC, timedelta
 from pymongo import MongoClient
 
+from src.data.dataTypes import Forecast, Location, Observations, WeatherDataPoint
+from src.data.databasehandler.databaseHandler import DatabaseHandler
 from src.helpers.annotations import overrides
 
 class MongoDbHandler(DatabaseHandler):

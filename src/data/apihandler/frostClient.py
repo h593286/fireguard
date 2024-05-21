@@ -1,7 +1,8 @@
+import os
 import requests
 from dotenv import load_dotenv
-from src.data.dataTypes import *
-import os
+
+from src.data.dataTypes import Location
 
 load_dotenv()
 
@@ -10,8 +11,8 @@ load_dotenv()
 # Only gets the observation, does not format it
 class FrostClient:
     def __init__(self):
-        self.FROST_CLIENT_ID = os.getenv('FROST_CLIENT_ID')
-        self.FROST_CLIENT_SECRET = os.getenv('FROST_CLIENT_SECRET')
+        self.FROST_CLIENT_ID = os.getenv('FROST_CLIENT_ID', '')
+        self.FROST_CLIENT_SECRET = os.getenv('FROST_CLIENT_SECRET', '')
         self.observationEndpoint = 'https://frost.met.no/observations/v0.jsonld'
         self.sourcesEndpoint = 'https://frost.met.no/sources/v0.jsonld'
 

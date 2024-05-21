@@ -8,7 +8,7 @@ def format_date(dt: datetime.datetime | datetime.date):
 def format_datetime(dt: datetime.datetime):
     return dt.strftime('%Y-%m-%dT%h:%M:%s%Z')
 
-def format_period(start: datetime.datetime, end: datetime.datetime):
+def format_period(start: datetime.datetime | datetime.date, end: datetime.datetime | datetime.date):
     start_date = format_date(start)
 
     end_date = format_date(end)

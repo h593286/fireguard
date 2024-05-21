@@ -1,14 +1,12 @@
 from datetime import datetime
 from typing_extensions import deprecated
+
 from src.data.dataTypes import Forecast, Location, Observations, WeatherDataPoint
 
 
 class DatabaseHandler:
-    #def __init__(self):
-
     @deprecated("Use `getObservation` to check for value existence")
     def checkObservation(self, location : Location, time):
-        #ToDo
         return False
 
     def getObservations(self, location: Location, from_date: datetime, to_date: datetime) -> list[WeatherDataPoint]:

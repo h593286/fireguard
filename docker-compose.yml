@@ -16,7 +16,6 @@ services:
       - BROKER_PORT=${BROKER_PORT}            
       - PUBLISHER_USERNAME=${PUBLISHER_USERNAME}     
       - PUBLISHER_PASSWORD=${PUBLISHER_PASSWORD}     
-      - FIREGUARD_API_URL=${FIREGUARD_API_URL}
   web-api:
     container_name: web-api
     build:

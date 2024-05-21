@@ -372,7 +372,7 @@ def import_data_and_publish():
         last_time = time.time() - start
         print(f"import complete, used {last_time} seconds. {len(errors)} errors occured", flush=True)
     
-schedule.every(60).seconds.do(import_data_and_publish)
+schedule.every(120).seconds.do(import_data_and_publish)
 
 def run_scheduling():
     while True:

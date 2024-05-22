@@ -9,6 +9,18 @@ The project is a monorepo (barley) micro-service. Each component is split into i
 
 ![ADA524 - Page 1(1)](https://github.com/h593286/fireguard/assets/69848516/ac06372c-1e74-461d-be83-9b4cfc8fa97a)
 
+## GitHub Structure
+
+src-
+-- api
+-- broker
+-- client
+-- data
+-- service
+--- TTFmodel 
+--- datacollector
+--- frcapi
+
 # Instructions 
 
 To replicate the project and to run it on your own device, please follow the instructions below.

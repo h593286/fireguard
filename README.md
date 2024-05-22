@@ -4,6 +4,10 @@
 *By Fredrik Fluge, Daniel K.Gunleiksrud, Magnus Noreide and Eilert Skram*
 
 
+# Architecture
+The project is a monorepo (barley) micro-service. Each component is split into its respective folder and the broker aspect of the architecture is separated out. 
+
+![ADA524 - Page 1(1)](https://github.com/h593286/fireguard/assets/69848516/ac06372c-1e74-461d-be83-9b4cfc8fa97a)
 
 # Instructions 
 

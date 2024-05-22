@@ -11,15 +11,29 @@ The project is a monorepo (barley) micro-service. Each component is split into i
 
 ## GitHub Structure
 
-src-
--- api
--- broker
--- client
--- data
--- service
---- TTFmodel 
---- datacollector
---- frcapi
+**src/**
+api (API layer):
+- logic: Contains functions with the logic thats being executed when the endpoints are called
+- server: Endpoint hosting
+- build: Init and builds the API
+
+broker:
+- publisher: The TTF publisher, publishes TTF to the HiveMQ. Runs through the list of cities and publishes their respective TTF at a set time-interval (i.e once a day)-
+- runner: Runs the publisher, maintains uptime
+- api client: Enables communication with the api for the broker 
+
+client:
+- clientprototype: The webclient prototype, now no longer functional for Get req to the api (Does not have auth), but acts as a subscriber. Displays the subscribed city.
+
+data (data layer):
+- apihandler: The apihandler and the respective api clients for external api-servies, i.e MET and FROST.  
+- databasehandler: the databasehandlers for storage and collection of existing data
+- dataextractor: Component for extracting data from weather servies into correct format.
+
+service (Service layer):
+- TTFmodel: Model for calculating TTF
+- datacollector: The component responsible for collecting data
+- frcapi: Business logic
 
 # Instructions 
 

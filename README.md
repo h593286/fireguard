@@ -12,6 +12,7 @@ The project is a monorepo (barley) micro-service. Each component is split into i
 ## GitHub Structure
 
 **src/**
+
 api (API layer):
 - logic: Contains functions with the logic thats being executed when the endpoints are called
 - server: Endpoint hosting

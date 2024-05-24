@@ -8,11 +8,12 @@ from src.data.databasehandler.databaseHandler import DatabaseHandler
 from src.helpers.annotations import overrides
 
 class MongoDbHandler(DatabaseHandler):
-    def __init__(self):
+    def __init__(self, mongo_client: MongoClient | None = None):
         super().__init__()
-        connection_string = os.getenv("MONGO_DB_CONNECTION_STRING")
-        print(connection_string)
-        self.client = MongoClient(connection_string)
+        if mongo_client is None:
+            connection_string = os.getenv("MONGO_DB_CONNECTION_STRING")
+            mongo_client = MongoClient(connection_string)
+        self.client = mongo_client
         print("connected to mongo db")
 
     @overrides(DatabaseHandler)

@@ -1,19 +1,12 @@
 
 from unittest import TestCase, main
 from unittest.mock import MagicMock
-from urllib.parse import urljoin
 import datetime
-import os
-from dotenv import load_dotenv
-import requests
-import urllib.parse
 
 # Fireguard API
 from src.api.requesthandler.api_logic import FireLogic
 from src.data.dataTypes import FireRisk
-from src.api.requesthandler.buildFireguardAPI import load_cities
 from src.service.frcapi import FireRiskModelAPI, FireRiskPrediction,Location
-import src.api.requesthandler.api_server as api_server
 
 
 # REST API

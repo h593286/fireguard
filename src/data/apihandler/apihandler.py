@@ -20,10 +20,11 @@ class APIHandler:
         print("time", time, type(time))
 
         # Default value
-        formatted_time = 'latest'
-
+        formatted_time = ''
+        if time is None:
+            formatted_time = 'latest'
         # single value
-        if is_date(time):
+        elif is_date(time):
             formatted_time = util.format_date(time) # type: ignore
 
         # Time series

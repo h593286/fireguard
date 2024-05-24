@@ -55,10 +55,12 @@ service (Service layer):
     - `utils.py`: helper methods used by the algorithm
 - `frcapi.py`: the applications business logic.
 
-**static**
+**static/**
+
 the static folder contains frontend files for client usage. These files can either be served by running the flask application in src/client or by using the docker compose files. The files are served using the [https://hub.docker.com/r/lipanski/docker-static-website](lipanski/docker-static-website) image
 
-**test**
+**test/**
+
 the test folder contains unittests for the project. The folder structure follows the same pattern as the src folder(to an extent), this helps with locating what tests are associated with a part of the application.
 
 

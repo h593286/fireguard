@@ -23,6 +23,7 @@ class MongoDbHandler(DatabaseHandler):
         
         database = self.client.get_database("observations")
         observations = database.get_collection(str(location))
+        print(observations, time_str)
         observation = observations.find_one({'timestamp': time_str})
 
         print("fetching", observation, time_str)

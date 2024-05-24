@@ -46,7 +46,7 @@ def create_response(body, response: Response, status_code):
 class GetFireRiskRequest(BaseModel):
     location: Location
 
-@app.get("cities/{city}")
+@app.get("/cities/{city}")
 def city(city: str, response: Response):
 
     city_json = api_server_.read_city(city)

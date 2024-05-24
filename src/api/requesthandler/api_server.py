@@ -50,7 +50,6 @@ class GetFireRiskRequest(BaseModel):
 def city(city: str, response: Response):
 
     city_json = api_server_.read_city(city)
-
     return create_response(city_json, response, status.HTTP_404_NOT_FOUND)
 
 @app.get("cities/{latitude}/{longitude}")

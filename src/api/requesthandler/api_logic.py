@@ -26,7 +26,6 @@ class FireLogic(BaseModel):
     
     
     def read_city(self, city: str) -> dict | None:
-
         for c in self.cities:
             if c["city"] == city:
                 return c

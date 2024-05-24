@@ -51,11 +51,16 @@ services:
       args:
         - ADMIN=${KEYCLOAK_ADMIN}
         - PASSWORD=${KEYCLOAK_PASSWORD}
-    #volumes:
-      #- keycloak_data:/opt/keycloak/data
-      #- ./src/api/authentication/keycloak/keycloak_info.json:/opt/keycloak/data/import/keycloak_info.json
     ports:
       - "8090:8080"
+
+  fireguard.frontend:
+    container_name: "fireguard-frontend"
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    ports:
+      - 3000:3000
 
 volumes:
   keycloak_data:

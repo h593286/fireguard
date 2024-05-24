@@ -93,18 +93,7 @@ class FireLogic(BaseModel):
         location = Location(latitude=latitude, longitude=longitude)
         prediction = self.modelApi.compute(location)
 
-        return prediction
-    
-'''    
-    def get_firerisk_by_coordinates_now(self, latitude: float, longitude: float):
-        location = Location(latitude=latitude, longitude=longitude)
-
-        obs_delta =  datetime.timedelta(days=2)
-        prediction = self.modelApi.compute_now(location, obs_delta)
-
-        return prediction
-'''
-    
+        return prediction    
 
 
 

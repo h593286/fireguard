@@ -5,10 +5,6 @@ class Location(BaseModel):
     latitude: float
     longitude: float
 
-    # def __str__(self):
-    #     format_str = f'lat={self.latitude}&long={self.longitude}'
-    #     return format_str
-
 class WeatherDataPoint(BaseModel):
 
     temperature: float

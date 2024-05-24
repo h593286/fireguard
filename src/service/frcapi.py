@@ -40,43 +40,7 @@ class FireRiskModelAPI:
         print("computation time: ", computation - obs_fetch)
         return value
 
-# compute from a timestamp until now?
-        '''
-    def compute_period_now(self, location: Location, obs_delta: timedelta) -> FireRiskPrediction:
-
-        # TODO: get firerisk straight from database? 
-
-        time_now = datetime.now()
-        start_time = time_now - obs_delta
-
-        observations=self.client.collectObservation(location, start_time)
-        forecast=self.client.collectForecast(location)
-
-        if isinstance(observations, Observations):
-            obs = observations
-
-        if isinstance(forecast, Forecast):
-            fct = forecast
-
-        forecast.data = forecast.data[:3] #TODO: automate this when ts is added for forecast
-        print(len(observations.data))
-        print(observations)
-
-        print(len(forecast.data))
-        print(forecast) #TODO: be able to handle lengt/amount of forecast data
-
-       
-
-        wd = WeatherData(created=time_now, observations=observations, forecast=forecast)
-
-        print(wd.to_json())
-
-        prediction = computeTTF.compute(wd)
-        print(prediction)
-        return prediction
-        '''
-    
-# compute firerisk from a timestamp to another timestamp
+    # compute firerisk from a timestamp to another timestamp
     def compute_period(self, location: Location, start: datetime, end: datetime) -> FireRiskPrediction:
 
         #TODO: add logic for handling start being after datetime.now() and end being before datetime.now()
@@ -93,7 +57,7 @@ class FireRiskModelAPI:
 
         return prediction
 
-# compute firerisk from now to a timestamp
+    # compute firerisk from now to a timestamp
     def compute_now_period(self, location: Location, fct_delta: timedelta):
         time_now = datetime.now(UTC)
         time_to = time_now + fct_delta
@@ -101,22 +65,8 @@ class FireRiskModelAPI:
         observations=self.client.collectObservation(location, None)
         forecast=self.client.collectForecast(location, time_to)
 
-        print(observations)
-
-        #print(len(forecast.data))
-        print(forecast) #TODO: be able to handle lengt/amount of forecast data
-
         wd = WeatherData(created=time_now, observations=observations, forecast=forecast)
-
-        print(wd.to_json())
 
         prediction = computeTTF.compute(wd) # TODO: get firerisk from straight from database instead of calculating each time?
         print(prediction)
         return prediction
-
-        '''
-
-    def compute_period_delta(self, location: Location, start: datetime, delta: datetime.timedelta) -> FireRiskPrediction:
-        pass
-
-        '''

@@ -1,14 +1,9 @@
 from datetime import datetime
-from typing_extensions import deprecated
 
 from src.data.dataTypes import Forecast, Location, Observations, WeatherDataPoint
 
 
 class DatabaseHandler:
-    @deprecated("Use `getObservation` to check for value existence")
-    def checkObservation(self, location : Location, time):
-        return False
-
     def getObservations(self, location: Location, from_date: datetime, to_date: datetime) -> list[WeatherDataPoint]:
         """Retrieves a range of observations between `from_date` and `to_date`
 

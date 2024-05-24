@@ -141,19 +141,3 @@ def compute_firerisk(temp_outside: list[float] | nt.NDArray[np.float64], relativ
     ttf = list(map(lambda y: 2 * np.exp(0.16*y),fmc))
 
     return relative_humidity_inside, ttf
-
-
-
-#####USAGE EXAMPLE, REMOVE IF NEEDED
-
-#from src.data.dataextractor.dataExtractor import *
-#import datetime
-
-#time_now = datetime.datetime.now()
-#observations = DataExtractor().extractObservation(Location(latitude=60.3894, longitude=5.3300))
-#forecast = DataExtractor().extractForecast(Location(latitude=60.3894, longitude=5.3300))
-
-#wd = WeatherData(created=time_now, observations=observations, forecast=forecast)
-
-#computed = compute(wd)
-#print(computed)

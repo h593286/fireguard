@@ -61,23 +61,3 @@ def preprocess(wd: WeatherData):
     wind_interpolated = np.interp(interpolation_timevector_sec, time_wind_clean, wind_clean)
     print(start_time,'dette er start-tiden')
     return start_time, interpolation_timevector_sec, temp_interpolated, humidity_interpolated, wind_interpolated, max_time_delta
-
-
-#####USAGE EXAMPLE, REMOVE IF NEEDED
-
-#from src.data.dataextractor.dataExtractor import *
-#import datetime
-
-#time_now = datetime.datetime.now()
-#observations = DataExtractor().extractObservation(Location(latitude=60.3894, longitude=5.3300))
-#forecast = DataExtractor().extractForecast(Location(latitude=60.3894, longitude=5.3300))
-
-#wd = WeatherData(created=time_now, observations=observations, forecast=forecast)
-
-#start_time, interpolation_timevector_sec, temp_interpolated, humidity_interpolated, wind_interpolated, max_time_delta = preprocess(wd)
-#print(start_time)
-#print(interpolation_timevector_sec)
-#print(temp_interpolated)
-#print(humidity_interpolated)
-#print(wind_interpolated)
-#print(max_time_delta)

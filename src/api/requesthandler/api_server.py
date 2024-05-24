@@ -33,12 +33,6 @@ app.add_middleware(
 # Fireguard API server endpoints
 # ==============================================================================
 
-
-# @app.get("/")
-# def read_root():
-#     return {"message": "Welcome to this awesome page!"}
-# # app.mount("/welcome", StaticFiles(directory="static"), name="static") #static files for later
-
 def create_response(body, response: Response, status_code):
     
     if body:
@@ -51,14 +45,6 @@ def create_response(body, response: Response, status_code):
 
 class GetFireRiskRequest(BaseModel):
     location: Location
-
-'''@app.post("/fire_risk")
-async def root(request: Request, response: Response):
-    json = await request.json()
-    body = GetFireRiskRequest(**json)
-    city = api_server_.get_firerisk_by_coordinates(body.location.latitude, body.location.longitude)
-    return create_response(city, response, status.HTTP_404_NOT_FOUND)'''
-
 
 @app.get("cities/{city}")
 def city(city: str, response: Response):
@@ -83,8 +69,6 @@ def fire_risk_city(city: str, response: Response, ts_from: Optional[datetime] = 
 def fire_risk_lat_long(latitude: float, longitude: float, response: Response, ts: Optional[datetime] = None, user: bool = Depends(verify_user_role)):
     firerisk = api_server_.get_firerisk_by_coordinates(latitude, longitude, ts)
     return create_response(firerisk, response, status.HTTP_404_NOT_FOUND)
-
-
 
 
 print("startin api in", getenv("ENVIRONMENT"), "mode", sep=" ")
